@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.service.CustomerService;
@@ -32,6 +35,43 @@ public class CustomerController {
 		theModel.addAttribute("customers", theCustomers);
 		
 		return "customers/list-customers";
+	}
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("customerId") int theId, Model theModel) {
+		
+		Customer theCustomer = customerService.findById(theId);
+		
+		theModel.addAttribute("customer", theCustomer);
+		
+		return "customers/customer-form";
+	}
+	
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		Customer theCustomer = new Customer();
+		
+		theModel.addAttribute("customer", theCustomer);
+		
+		return "customers/customer-form";
+	}
+	
+	
+	@PostMapping("/save")
+	public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
+		
+		customerService.save(theCustomer);
+		
+		return "redirect:/customers/list";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("customerId") int theId) {
+		
+		customerService.deleteById(theId);
+		
+		return "redirect:/customers/list";
 	}
 
 }

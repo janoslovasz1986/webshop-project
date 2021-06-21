@@ -19,12 +19,18 @@
 	
 		<h3>Customers list</h3>
 		
+		<a th:href="@{/customers/showFormForAdd}"
+			class="btn btn-primary btn-sm mb-3">
+			Add Customer
+		</a>
+		
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			
@@ -33,6 +39,17 @@
 					<td th:text="${tempCustomer.firstName}"/>
 					<td th:text="${tempCustomer.lastName}"/>
 					<td th:text="${tempCustomer.email}"/>
+					<td>
+						<a th:href="@{/customers/showFormForUpdate(customerId=${tempCustomer.id})}" 
+						class="btn btn-info btn-sm">
+						Update
+						</a>
+						
+						<a th:href="@{/customers/delete(customerId=${tempCustomer.id})}" 
+						class="btn btn-info btn-sm">
+						Delete
+						</a>
+					</td>
 				</tr>
 			
 			</tbody>
