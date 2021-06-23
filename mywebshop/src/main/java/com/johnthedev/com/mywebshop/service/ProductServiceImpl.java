@@ -1,13 +1,16 @@
 package com.johnthedev.com.mywebshop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.johnthedev.com.mywebshop.dao.ProductRepository;
 import com.johnthedev.com.mywebshop.entity.Product;
 
+@Service
 public class ProductServiceImpl implements ProductService{
 	
 	private ProductRepository productRepository;
@@ -20,7 +23,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> findAll() {
 		
-		return productRepository.findAll();
+		List<Product> products = new ArrayList<Product>();
+		
+		products = productRepository.findAll();
+		
+		return products;
 	}
 
 	@Override

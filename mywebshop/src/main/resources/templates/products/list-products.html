@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en" xlmns:th="http:/www.thymeleaf.org">
+<head>
+	<title>Customer directory</title>
+	
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap CSS -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+		crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h3>Products list</h3>
+		
+		<a th:href="@{/products/showFormForAdd}"
+			class="btn btn-primary btn-sm mb-3">
+			Add Product
+		</a>
+		
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Product Name</th>
+					<th>Product Price</th>
+					<th>Discount</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="tempProduct : ${products}">
+					<td th:text="${tempProduct.productName}"/>
+					<td th:text="${tempProduct.productName}"/>
+					<td th:text="${tempProduct.discount}"/>
+					<td>
+					
+						<a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}" 
+						class="btn btn-info btn-sm">
+						Update
+						</a>
+					<!-- 	
+						<a th:href="@{/products/delete(productId=${tempProduct.id})}" 
+						class="btn btn-info btn-sm">
+						Delete
+						</a>
+						-->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+</body>
+</html>

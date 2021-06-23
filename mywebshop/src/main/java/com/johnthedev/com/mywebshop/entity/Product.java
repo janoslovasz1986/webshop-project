@@ -22,7 +22,7 @@ public class Product {
 	@Column(name="product_price")
 	private double productPrice;
 	
-	@Column(name="dscount")
+	@Column(name="discount")
 	private double discount;
 	
 	public Product() {
@@ -42,7 +42,7 @@ public class Product {
 		this.discount = discount;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
