@@ -64,4 +64,12 @@ public class ProductController {
 		
 		return "products/product-form";
 	}
+	
+	@GetMapping("/delete")
+	public String deleteProduct(@RequestParam("productId") int theId) {
+		
+		productService.deleteById(theId);
+		
+		return "redirect:/products/list";
+	}
 }
