@@ -1,31 +1,20 @@
 package com.johnthedev.com.mywebshop.entity;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class ShoppingCart {
 
-	private Customer shoppingCartCustomer;
 	private HashMap<Product, Integer> shoppingCartProducts;
 	
 	public ShoppingCart() {		
 	}
 
-	public ShoppingCart(Customer shoppingCartCustomer, HashMap<Product, Integer> shoppingCartProducts) {
-		this.shoppingCartCustomer = shoppingCartCustomer;
+	public ShoppingCart(HashMap<Product, Integer> shoppingCartProducts) {
 		this.shoppingCartProducts = shoppingCartProducts;
 	}
 
-	public Customer getShoppingCartCustomer() {
-		return shoppingCartCustomer;
-	}
-
-	public void setShoppingCartCustomer(Customer shoppingCartCustomer) {
-		this.shoppingCartCustomer = shoppingCartCustomer;
-	}
-
-	public Map<Product, Integer> getShoppingCartProducts() {
+	public HashMap<Product, Integer> getShoppingCartProducts() {
 		return shoppingCartProducts;
 	}
 
@@ -35,10 +24,10 @@ public class ShoppingCart {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [shoppingCartCustomer=" + shoppingCartCustomer + ", shoppingCartProducts="
-				+ shoppingCartProducts + "]";
+		return "ShoppingCart [shoppingCartProducts=" + shoppingCartProducts + "]";
 	}
-	
+
+
 	
 	
 	
