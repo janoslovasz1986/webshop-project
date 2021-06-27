@@ -1,34 +1,28 @@
 package com.johnthedev.com.mywebshop.entity;
 
-import java.util.HashMap;
-
+import java.util.List;
 
 public class ShoppingCart {
-
-	private HashMap<Product, Integer> shoppingCartProducts;
 	
-	public ShoppingCart() {		
+	private List<ShoppingCartItem> listOfShoppingCartProducts;
+	
+	public ShoppingCart() {
+		
 	}
 
-	public ShoppingCart(HashMap<Product, Integer> shoppingCartProducts) {
-		this.shoppingCartProducts = shoppingCartProducts;
+	public List<ShoppingCartItem> getListOfShoppingCartProducts() {
+		return listOfShoppingCartProducts;
 	}
 
-	public HashMap<Product, Integer> getShoppingCartProducts() {
-		return shoppingCartProducts;
-	}
-
-	public void setShoppingCartProducts(HashMap<Product, Integer> shoppingCartProducts) {
-		this.shoppingCartProducts = shoppingCartProducts;
+	public void setListOfShoppingCartProducts(List<ShoppingCartItem> listOfShoppingCartProducts) {
+		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [shoppingCartProducts=" + shoppingCartProducts + "]";
+		return "ShoppingCart [listOfShoppingCartProducts=" + listOfShoppingCartProducts + "]";
 	}
+	
+	
 
-
-	
-	
-	
 }

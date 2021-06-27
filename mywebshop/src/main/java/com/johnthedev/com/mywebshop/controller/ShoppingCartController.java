@@ -1,51 +1,53 @@
 package com.johnthedev.com.mywebshop.controller;
 
-import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.johnthedev.com.mywebshop.entity.Product;
-import com.johnthedev.com.mywebshop.entity.ShoppingCart;
+import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 
 @Controller
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {
 
-	private ShoppingCart shoppingCart;
+	private ShoppingCartItem shoppingCartItem;
 	
 	@Autowired
-	public ShoppingCartController(ShoppingCart theShoppingCart) {
+	public ShoppingCartController(ShoppingCartItem theShoppingCartItem) {
 		
-		shoppingCart=theShoppingCart;
+		shoppingCartItem=theShoppingCartItem;
 	}
 
+	/*
 	@GetMapping("/addToShoppingCart")
 	public String addToShoppingCart(@RequestAttribute("productId") int theId, Model theModel) {
 		
-		HashMap<Product, Integer> tempShoppingCartProducts = new HashMap<Product, Integer>();
-		tempShoppingCartProducts.put(new Product("aaa", 1000, 0), null);
+		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(new Product("aaa", 1000, 0), 1);
 		
-		shoppingCart.setShoppingCartProducts(tempShoppingCartProducts);
-		theModel.addAttribute(shoppingCart);
+		theModel.addAttribute("shoppingCartItem" , tempShoppingCartItem);
 	
 		return "shoppingCart/shoppingcart.html";
 	}
-	
+	*/
 	@GetMapping("/list")
 	public String listShoppingCart(Model theModel) {
 		
-		HashMap<Product, Integer> tempShoppingCartProducts = new HashMap<Product, Integer>();
-		tempShoppingCartProducts.put(new Product("aaa", 1000, 0), 1);
-		tempShoppingCartProducts.put(new Product("bbb", 2000, 0), 2);
+		//ShoppingCartItem theShoppingCartItem = new ShoppingCartItem(new Product("aaa", 1000, 0), 1);
 		
-		shoppingCart.setShoppingCartProducts(tempShoppingCartProducts);
+		ShoppingCartItem theShoppingCartItem = new ShoppingCartItem();
 		
-		theModel.addAttribute("shoppingCart",shoppingCart);
+		theShoppingCartItem = new ShoppingCartItem(new Product("aaa", 1000, 0), 2);
+		
+		//shoppingCartItem.setInshoppingCartProduct(new Product("aaa", 1000, 0));
+		//shoppingCartItem.setInShoppingCartProductQuantity(1);
+		
+		System.out.println(theShoppingCartItem);
+		theModel.addAttribute("shoppingCartItem" , theShoppingCartItem);
+		
+
 		
 		
 		return "shoppingcart/shoppingcart";

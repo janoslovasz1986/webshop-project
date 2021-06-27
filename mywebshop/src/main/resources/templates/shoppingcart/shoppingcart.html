@@ -15,7 +15,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	
+
 
 	<div class="container">
 		<h3>Shopping cart</h3>
@@ -26,18 +26,23 @@
 					<th>Product Name</th>
 					<th>Product Price</th>
 					<th>Discount</th>
-					<th>Quantity</th> 
+					<th>Quantity</th>
+					<th>Sum Price</th>
 				</tr>
 			</thead>
 
 			<tbody>
-				<tr th:each="tempShoppingCart : ${shoppingCart}">
-				
-				<!-- <td th:text="${tempShoppingCart.shoppingCartProducts}" />  -->
+				<tr th:each="tempShoppingCartItem : ${shoppingCartItem}">
+
+					<!-- <td th:text="${tempShoppingCartItem.shoppingCartProducts}" />  -->
+
+
+					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.productName}" />
+					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.productPrice}" />
+					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.Discount}" />
+					<td th:text="${tempShoppingCartItem.inShoppingCartProductQuantity}" />   
+					<td th:text="${tempShoppingCartItem.inShoppingCartProductQuantity}*${tempShoppingCartItem.inShoppingCartProduct.productPrice}" />  
 					
-					<tr th:each="tempShoppingCartProduct : @{tempShoppingCart.shoppingCartProducts}">
-						<td th:text="@{tempShoppingCartProduct.productName}"/>				
-					</tr>
 			</tbody>
 		</table>
 	</div>
