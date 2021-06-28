@@ -35,4 +35,10 @@ public class ShoppingCartItem {
 				+ inShoppingCartProductQuantity + "]";
 	}
 	
+	public double getAmount() {
+		
+		return this.inShoppingCartProduct.getProductPrice() * this.inShoppingCartProductQuantity;
+		
+	}
+	
 }

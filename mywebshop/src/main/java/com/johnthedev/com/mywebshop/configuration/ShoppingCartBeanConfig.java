@@ -8,12 +8,12 @@ import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 
 @Configuration
 public class ShoppingCartBeanConfig {
-	
+	/*
 	@Bean
 	@SessionScope
 	public ShoppingCartItem shoppingCartItem() {
 		
 		return new ShoppingCartItem();
 	}
-
+	*/
 }

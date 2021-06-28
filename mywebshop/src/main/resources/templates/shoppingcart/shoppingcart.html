@@ -32,17 +32,19 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="tempShoppingCartItem : ${shoppingCartItem}">
+				<tr th:each="tempShoppingCartLine : ${shoppingCart.listOfShoppingCartProducts}">
 
-					<!-- <td th:text="${tempShoppingCartItem.shoppingCartProducts}" />  -->
-
-
-					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.productName}" />
-					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.productPrice}" />
-					<td th:text="${tempShoppingCartItem.inShoppingCartProduct.Discount}" />
-					<td th:text="${tempShoppingCartItem.inShoppingCartProductQuantity}" />   
-					<td th:text="${tempShoppingCartItem.inShoppingCartProductQuantity}*${tempShoppingCartItem.inShoppingCartProduct.productPrice}" />  
-					
+					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.productName}" />
+					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.productPrice}" />
+					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.Discount}" />
+					<td th:text="${tempShoppingCartLine.inShoppingCartProductQuantity}" />
+					<td th:text="${tempShoppingCartLine.getAmount()}" />
+				</tr>
+				<td th:text="'Sum Price:'" />
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td th:text="${shoppingCart.calcSumPrice()}" />										
 			</tbody>
 		</table>
 	</div>
