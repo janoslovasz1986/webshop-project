@@ -1,69 +1,55 @@
 package com.johnthedev.com.mywebshop.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
+import com.johnthedev.com.mywebshop.service.ProductService;
 
 @Controller
-@RequestMapping("/shoppingCart")
+@RequestMapping("/shoppingcart")
 public class ShoppingCartController {
 
-	private ShoppingCartItem shoppingCartItem;
-	
-	public ShoppingCart shoppingCart; 
-	/*
+	private ProductService productService;
+
 	@Autowired
-	public ShoppingCartController(ShoppingCartItem theShoppingCartItem) {
-		
-		shoppingCartItem=theShoppingCartItem;
+	public ShoppingCartController(ProductService theProductService) {
+
+		productService = theProductService;
+
 	}
-	*/
-
-
-	/*
-	@GetMapping("/addToShoppingCart")
-	public String addToShoppingCart(@RequestAttribute("productId") int theId, Model theModel) {
-		
-		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(new Product("aaa", 1000, 0), 1);
-		
-		theModel.addAttribute("shoppingCartItem" , tempShoppingCartItem);
 	
-		return "shoppingCart/shoppingcart.html";
+	@Autowired
+	public ShoppingCart theShoppingCart;
+
+	@GetMapping("/addProductToShoppingCart")
+	public String addProductToShoppingCart(@RequestParam("productId") int theId, Model theModel) {
+
+		Product tempProdct = productService.findById(theId);
+
+		int tempProductQuantity = 1;
+
+		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProdct, tempProductQuantity);
+		
+		theShoppingCart.addProduct(tempShoppingCartItem);
+
+		theModel.addAttribute("shoppingCart", theShoppingCart);
+		
+		//return "shoppingCart/shoppingcart";
+		return "redirect:/products/list";
 	}
-	*/
+
 	@GetMapping("/list")
 	public String listShoppingCart(Model theModel) {
-		
-		
-		ShoppingCartItem theShoppingCartItem1 = new ShoppingCartItem();
-		ShoppingCartItem theShoppingCartItem2 = new ShoppingCartItem();
-		
-		theShoppingCartItem1 = new ShoppingCartItem(new Product("aaa", 1000, 0), 2);
-		theShoppingCartItem2 = new ShoppingCartItem(new Product("bbb", 2000, 0), 3);
-		
-		ShoppingCart shoppingCart = new ShoppingCart();
-		
-		shoppingCart.addProduct(theShoppingCartItem1);
-		shoppingCart.addProduct(theShoppingCartItem2);
-		
-		System.out.println(shoppingCart);
-		
-		
-		
-		theModel.addAttribute("shoppingCart" , shoppingCart);
-		
 
-		
-		
+		theModel.addAttribute("shoppingCart", theShoppingCart);
+
 		return "shoppingcart/shoppingcart";
 	}
 

@@ -36,9 +36,14 @@
 			<tbody>
 				<tr th:each="tempProduct : ${products}">
 					<td th:text="${tempProduct.productName}"/>
-					<td th:text="${tempProduct.productName}"/>
+					<td th:text="${tempProduct.productPrice}"/>
 					<td th:text="${tempProduct.discount}"/>
 					<td>
+						<a th:href="@{/shoppingcart/addProductToShoppingCart(productId=${tempProduct.id})}" 
+						class="btn btn-info btn-sm">
+						Add to ShoppingCart
+						</a>
+					
 					
 						<a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}" 
 						class="btn btn-info btn-sm">
@@ -57,5 +62,6 @@
 		</table>
 	
 	</div>
+	<a href="/shoppingcart/list">Back to Shoppingcart</a>
 </body>
 </html>
