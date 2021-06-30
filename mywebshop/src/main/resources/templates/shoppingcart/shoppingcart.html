@@ -28,6 +28,7 @@
 					<th>Discount</th>
 					<th>Quantity</th>
 					<th>Sum Price</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 
@@ -39,12 +40,25 @@
 					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.Discount}" />
 					<td th:text="${tempShoppingCartLine.inShoppingCartProductQuantity}" />
 					<td th:text="${tempShoppingCartLine.getAmount()}" />
+					<td> 
+					<a th:href="@{/shoppingcart/removeShoppingCartProduct(productId=${tempShoppingCartLine.inShoppingCartProduct.id})}" 
+						class="btn btn-info btn-sm">
+						Remove
+						</a>
+					</td>
 				</tr>
 				<td th:text="'Sum Price:'" />
 				<td> </td>
 				<td> </td>
 				<td> </td>
-				<td th:text="${shoppingCart.calcSumPrice()}" />										
+				<td th:text="${shoppingCart.calcSumPrice()}" />			
+				<td> 
+					<a th:href="@{/shoppingcart/removeAllShoppingCartProduct}" 
+						class="btn btn-info btn-sm">
+						Remove All
+					</a>
+				</td>							
+
 			</tbody>
 		</table>
 	</div>

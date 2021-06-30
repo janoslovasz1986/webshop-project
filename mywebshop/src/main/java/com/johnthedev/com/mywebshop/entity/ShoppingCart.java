@@ -20,6 +20,11 @@ public class ShoppingCart {
 		this.customer = customer;
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
+	
+
+	public ShoppingCart(List<ShoppingCartItem> listOfShoppingCartProducts) {
+		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
+	}
 
 	public int getOrderNum() {
 		return orderNum;
@@ -57,6 +62,25 @@ public class ShoppingCart {
 		
 	}
 	
+	public void removeProduct(ShoppingCartItem shoppingCartItem) {
+
+		for(ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
+			
+			if(theShoppingCartItem.equals(shoppingCartItem)) {
+
+				listOfShoppingCartProducts.remove(theShoppingCartItem);
+				break;
+			}
+		}
+
+	}
+	
+	public void removeAllProducts() {
+
+		listOfShoppingCartProducts.clear();
+		
+	}
+	
 	public Double calcSumPrice() {
 		
 		double sum =0;
@@ -68,6 +92,35 @@ public class ShoppingCart {
 		
 		return sum;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((listOfShoppingCartProducts == null) ? 0 : listOfShoppingCartProducts.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShoppingCart other = (ShoppingCart) obj;
+		if (listOfShoppingCartProducts == null) {
+			if (other.listOfShoppingCartProducts != null)
+				return false;
+		} else if (!listOfShoppingCartProducts.equals(other.listOfShoppingCartProducts))
+			return false;
+		return true;
+	}
+
+
+
+
 	
 	
 

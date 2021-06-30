@@ -31,17 +31,16 @@ public class ShoppingCartController {
 	@GetMapping("/addProductToShoppingCart")
 	public String addProductToShoppingCart(@RequestParam("productId") int theId, Model theModel) {
 
-		Product tempProdct = productService.findById(theId);
+		Product tempProduct = productService.findById(theId);
 
 		int tempProductQuantity = 1;
 
-		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProdct, tempProductQuantity);
+		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProduct, tempProductQuantity);
 		
 		theShoppingCart.addProduct(tempShoppingCartItem);
 
 		theModel.addAttribute("shoppingCart", theShoppingCart);
 		
-		//return "shoppingCart/shoppingcart";
 		return "redirect:/products/list";
 	}
 
@@ -50,6 +49,33 @@ public class ShoppingCartController {
 
 		theModel.addAttribute("shoppingCart", theShoppingCart);
 
+		return "shoppingcart/shoppingcart";
+	}
+	
+	@GetMapping("/removeShoppingCartProduct")
+	public String removeShoppingCartProduct(@RequestParam("productId") int theId, Model theModel) {
+		
+		Product tempProduct = productService.findById(theId);
+
+		int tempProductQuantity = 1;
+
+		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProduct, tempProductQuantity);
+		
+		theShoppingCart.removeProduct(tempShoppingCartItem);
+		
+		theModel.addAttribute("shoppingCart", theShoppingCart);
+		
+		return "shoppingcart/shoppingcart";
+	}
+	
+	@GetMapping("/removeAllShoppingCartProduct")
+	public String removeAllShoppingCartProduct(Model theModel) {
+		
+		
+		theShoppingCart.removeAllProducts();
+		
+		theModel.addAttribute("shoppingCart", theShoppingCart);
+		
 		return "shoppingcart/shoppingcart";
 	}
 
