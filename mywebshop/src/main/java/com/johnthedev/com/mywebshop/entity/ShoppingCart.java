@@ -1,18 +1,19 @@
 package com.johnthedev.com.mywebshop.entity;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class ShoppingCart {
-	
+
 	private int orderNum;
-	
+
 	private Customer customer;
-	
+
 	private List<ShoppingCartItem> listOfShoppingCartProducts = new ArrayList<ShoppingCartItem>();
-	
+
 	public ShoppingCart() {
-		
+
 	}
 
 	public ShoppingCart(int orderNum, Customer customer, List<ShoppingCartItem> listOfShoppingCartProducts) {
@@ -20,7 +21,6 @@ public class ShoppingCart {
 		this.customer = customer;
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
-	
 
 	public ShoppingCart(List<ShoppingCartItem> listOfShoppingCartProducts) {
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
@@ -55,18 +55,34 @@ public class ShoppingCart {
 		return "ShoppingCart [orderNum=" + orderNum + ", customer=" + customer + ", listOfShoppingCartProducts="
 				+ listOfShoppingCartProducts + "]";
 	}
-	
+
 	public void addProduct(ShoppingCartItem shoppingCartItem) {
+
+		//if (listOfShoppingCartProducts.isEmpty()) {
+
+		//	listOfShoppingCartProducts.add(shoppingCartItem);
+		//}
+
+		for (ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
+			if (theShoppingCartItem.getInShoppingCartProduct().getId() == shoppingCartItem.getInShoppingCartProduct()
+					.getId()) {
+
+				theShoppingCartItem
+						.setInShoppingCartProductQuantity(theShoppingCartItem.getInShoppingCartProductQuantity() + 1);
+
+			} 
+		}
 		
 		listOfShoppingCartProducts.add(shoppingCartItem);
 		
+
 	}
-	
+
 	public void removeProduct(ShoppingCartItem shoppingCartItem) {
 
-		for(ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
-			
-			if(theShoppingCartItem.equals(shoppingCartItem)) {
+		for (ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
+
+			if (theShoppingCartItem.equals(shoppingCartItem)) {
 
 				listOfShoppingCartProducts.remove(theShoppingCartItem);
 				break;
@@ -74,22 +90,22 @@ public class ShoppingCart {
 		}
 
 	}
-	
+
 	public void removeAllProducts() {
 
 		listOfShoppingCartProducts.clear();
-		
+
 	}
-	
+
 	public Double calcSumPrice() {
-		
-		double sum =0;
-		
-		for(ShoppingCartItem tempCartItem : listOfShoppingCartProducts) {
-			
+
+		double sum = 0;
+
+		for (ShoppingCartItem tempCartItem : listOfShoppingCartProducts) {
+
 			sum = sum + tempCartItem.getAmount();
 		}
-		
+
 		return sum;
 	}
 
@@ -117,15 +133,5 @@ public class ShoppingCart {
 			return false;
 		return true;
 	}
-
-
-
-
-	
-	
-
-	
-	
-	
 
 }
