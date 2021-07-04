@@ -1,7 +1,6 @@
 package com.johnthedev.com.mywebshop.entity;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class ShoppingCart {
@@ -58,34 +57,52 @@ public class ShoppingCart {
 
 	public void addProduct(ShoppingCartItem shoppingCartItem) {
 
-		//if (listOfShoppingCartProducts.isEmpty()) {
+		if (listOfShoppingCartProducts.isEmpty()) {
 
-		//	listOfShoppingCartProducts.add(shoppingCartItem);
-		//}
+			listOfShoppingCartProducts.add(shoppingCartItem);
 
-		for (ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
-			if (theShoppingCartItem.getInShoppingCartProduct().getId() == shoppingCartItem.getInShoppingCartProduct()
-					.getId()) {
+		} else {
 
-				theShoppingCartItem
-						.setInShoppingCartProductQuantity(theShoppingCartItem.getInShoppingCartProductQuantity() + 1);
+			int size = listOfShoppingCartProducts.size();
 
-			} 
+			boolean isNewItem = false;
+
+			for (int i = 0; i < size; i++) {
+				isNewItem = false;
+
+				if (listOfShoppingCartProducts.get(i).getInShoppingCartProduct().getId() != shoppingCartItem
+						.getInShoppingCartProduct().getId()) {
+
+					isNewItem = true;
+				} else {
+					listOfShoppingCartProducts.get(i).setInShoppingCartProductQuantity(
+							listOfShoppingCartProducts.get(i).getInShoppingCartProductQuantity() + 1);
+					break;
+				}
+			}
+
+			if (isNewItem) {
+				listOfShoppingCartProducts.add(shoppingCartItem);
+			}
 		}
-		
-		listOfShoppingCartProducts.add(shoppingCartItem);
-		
-
 	}
 
 	public void removeProduct(ShoppingCartItem shoppingCartItem) {
 
 		for (ShoppingCartItem theShoppingCartItem : listOfShoppingCartProducts) {
 
-			if (theShoppingCartItem.equals(shoppingCartItem)) {
+			if (theShoppingCartItem.getInShoppingCartProduct().getId() == shoppingCartItem.getInShoppingCartProduct()
+					.getId()) {
 
-				listOfShoppingCartProducts.remove(theShoppingCartItem);
-				break;
+				if (theShoppingCartItem.getInShoppingCartProductQuantity() > 1) {
+					theShoppingCartItem.setInShoppingCartProductQuantity(
+							
+							theShoppingCartItem.getInShoppingCartProductQuantity() - 1);
+				} else {
+
+					listOfShoppingCartProducts.remove(theShoppingCartItem);
+					break;
+				}
 			}
 		}
 
