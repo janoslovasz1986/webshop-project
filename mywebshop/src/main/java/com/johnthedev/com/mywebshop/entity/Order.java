@@ -1,10 +1,15 @@
 package com.johnthedev.com.mywebshop.entity;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,12 +21,26 @@ public class Order {
 	@Column(name="id")
 	private int id; 
 	
-	@Column(name="customer")
+	//@OneToOne
+	//@JoinColumn(
+	//		name="id",
+	//		referencedColumnName="id"
+	//		)
 	private Customer customer;
 	
-	@Column(name="shoppingcart")
+	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name ="order_products",
+							column = @Column(name="inShoppingCartProduct"))
+	})
+	//@OneToOne(cascade = CascadeType.ALL)
 	private ShoppingCart shoppingCart;
-
+	
+	
+	//@ElementCollection
+	//private List<ShoppingCart> shoppingCart = new ArrayList<ShoppingCart>();
+	
 	public Order() {
 	
 	}

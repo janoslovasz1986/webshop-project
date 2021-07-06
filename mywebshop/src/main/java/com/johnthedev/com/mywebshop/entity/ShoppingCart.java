@@ -3,42 +3,26 @@ package com.johnthedev.com.mywebshop.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+
+@Embeddable
 public class ShoppingCart {
 
-	private int orderNum;
-
-	private Customer customer;
-
+	@ElementCollection
+	@CollectionTable(name="student", joinColumns=@JoinColumn(name="id"))
+	@Column(name="product_name")
 	private List<ShoppingCartItem> listOfShoppingCartProducts = new ArrayList<ShoppingCartItem>();
 
 	public ShoppingCart() {
 
 	}
 
-	public ShoppingCart(int orderNum, Customer customer, List<ShoppingCartItem> listOfShoppingCartProducts) {
-		this.orderNum = orderNum;
-		this.customer = customer;
-		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
-	}
-
 	public ShoppingCart(List<ShoppingCartItem> listOfShoppingCartProducts) {
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
-	}
-
-	public int getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(int orderNum) {
-		this.orderNum = orderNum;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 	public List<ShoppingCartItem> getListOfShoppingCartProducts() {
@@ -51,7 +35,7 @@ public class ShoppingCart {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [orderNum=" + orderNum + ", customer=" + customer + ", listOfShoppingCartProducts="
+		return "ShoppingCart [listOfShoppingCartProducts="
 				+ listOfShoppingCartProducts + "]";
 	}
 

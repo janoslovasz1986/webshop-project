@@ -1,5 +1,8 @@
 package com.johnthedev.com.mywebshop.entity;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class ShoppingCartItem {
 
 	private Product inShoppingCartProduct;
