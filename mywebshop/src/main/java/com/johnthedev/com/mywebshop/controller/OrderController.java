@@ -38,6 +38,8 @@ public class OrderController {
 		
 		theOrder.setCustomer(tempCustomer);
 		theOrder.setShoppingCart(theShoppingCart);
+	
+		
 		
 		orderService.save(theOrder);
 		

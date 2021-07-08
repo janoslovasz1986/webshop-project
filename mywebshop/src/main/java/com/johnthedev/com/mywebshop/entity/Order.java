@@ -1,16 +1,13 @@
 package com.johnthedev.com.mywebshop.entity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="order")
@@ -21,25 +18,15 @@ public class Order {
 	@Column(name="id")
 	private int id; 
 	
-	//@OneToOne
-	//@JoinColumn(
-	//		name="id",
-	//		referencedColumnName="id"
-	//		)
+	//@OneToOne(mappedBy = "customer")
+	@Transient
 	private Customer customer;
 	
-	
-	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name ="order_products",
-							column = @Column(name="inShoppingCartProduct"))
-	})
-	//@OneToOne(cascade = CascadeType.ALL)
+	//@OneToOne(mappedBy = "id")
+	@Transient
 	private ShoppingCart shoppingCart;
 	
 	
-	//@ElementCollection
-	//private List<ShoppingCart> shoppingCart = new ArrayList<ShoppingCart>();
 	
 	public Order() {
 	
@@ -49,6 +36,7 @@ public class Order {
 		this.customer = customer;
 		this.shoppingCart = shoppingCart;
 	}
+	
 
 	public int getId() {
 		return id;
@@ -73,6 +61,7 @@ public class Order {
 	public void setShoppingCart(ShoppingCart shoppingCart) {
 		this.shoppingCart = shoppingCart;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -112,6 +101,8 @@ public class Order {
 			return false;
 		return true;
 	}
+
+
 	
 	
 	

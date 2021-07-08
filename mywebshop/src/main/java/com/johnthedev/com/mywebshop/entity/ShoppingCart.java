@@ -3,18 +3,10 @@ package com.johnthedev.com.mywebshop.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-
-@Embeddable
 public class ShoppingCart {
 
-	@ElementCollection
-	@CollectionTable(name="student", joinColumns=@JoinColumn(name="id"))
-	@Column(name="product_name")
+	private int id;
+	
 	private List<ShoppingCartItem> listOfShoppingCartProducts = new ArrayList<ShoppingCartItem>();
 
 	public ShoppingCart() {
@@ -22,6 +14,11 @@ public class ShoppingCart {
 	}
 
 	public ShoppingCart(List<ShoppingCartItem> listOfShoppingCartProducts) {
+		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
+	}
+
+	public ShoppingCart(int id, List<ShoppingCartItem> listOfShoppingCartProducts) {
+		this.id = id;
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
 
@@ -33,10 +30,21 @@ public class ShoppingCart {
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
 
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+
 	@Override
 	public String toString() {
-		return "ShoppingCart [listOfShoppingCartProducts="
-				+ listOfShoppingCartProducts + "]";
+		return "ShoppingCart [id=" + id + ", listOfShoppingCartProducts=" + listOfShoppingCartProducts + "]";
 	}
 
 	public void addProduct(ShoppingCartItem shoppingCartItem) {

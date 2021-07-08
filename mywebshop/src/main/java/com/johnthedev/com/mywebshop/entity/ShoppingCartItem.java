@@ -1,26 +1,25 @@
 package com.johnthedev.com.mywebshop.entity;
 
-import javax.persistence.Embeddable;
+import com.johnthedev.com.mywebshop.dto.ProductDto;
 
-@Embeddable
 public class ShoppingCartItem {
 
-	private Product inShoppingCartProduct;
+	private ProductDto inShoppingCartProduct;
 	private int inShoppingCartProductQuantity;
 	
 	public ShoppingCartItem() {		
 	}
 
-	public ShoppingCartItem(Product inShoppingCartProduct, int inShoppingCartProductQuantity) {
+	public ShoppingCartItem(ProductDto inShoppingCartProduct, int inShoppingCartProductQuantity) {
 		this.inShoppingCartProduct = inShoppingCartProduct;
 		this.inShoppingCartProductQuantity = inShoppingCartProductQuantity;
 	}
 
-	public Product getInShoppingCartProduct() {
+	public ProductDto getInShoppingCartProduct() {
 		return inShoppingCartProduct;
 	}
 
-	public void setInshoppingCartProduct(Product inShoppingCartProduct) {
+	public void setInshoppingCartProduct(ProductDto inShoppingCartProduct) {
 		this.inShoppingCartProduct = inShoppingCartProduct;
 	}
 

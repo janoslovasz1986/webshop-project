@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
+import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
 import com.johnthedev.com.mywebshop.service.ProductService;
 
 @Controller
@@ -26,16 +28,19 @@ public class ShoppingCartController {
 	}
 	
 	@Autowired
+	public ProductDtoMapper productDtoMapper;
+	
+	@Autowired
 	public ShoppingCart theShoppingCart;
 
 	@GetMapping("/addProductToShoppingCart")
 	public String addProductToShoppingCart(@RequestParam("productId") int theId, Model theModel) {
 
-		Product tempProduct = productService.findById(theId);
+		ProductDto tempProductDto = productDtoMapper.ProductEntityToProductDtoMapper(productService.findById(theId));
 
 		int tempProductQuantity = 1;
 
-		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProduct, tempProductQuantity);
+		ShoppingCartItem tempShoppingCartItem = new ShoppingCartItem(tempProductDto, tempProductQuantity);
 		
 		theShoppingCart.addProduct(tempShoppingCartItem);
 
@@ -55,7 +60,7 @@ public class ShoppingCartController {
 	@GetMapping("/removeShoppingCartProduct")
 	public String removeShoppingCartProduct(@RequestParam("productId") int theId, Model theModel) {
 		
-		Product tempProduct = productService.findById(theId);
+		ProductDto tempProduct = productDtoMapper.ProductEntityToProductDtoMapper(productService.findById(theId));
 
 		int tempProductQuantity = 1;
 
