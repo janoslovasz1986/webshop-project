@@ -33,10 +33,11 @@ public class ShoppingCartController {
 	@Autowired
 	public ShoppingCart theShoppingCart;
 
+	/*
 	@GetMapping("/addProductToShoppingCart")
 	public String addProductToShoppingCart(@RequestParam("productId") int theId, Model theModel) {
 
-		ProductDto tempProductDto = productDtoMapper.ProductEntityToProductDtoMapper(productService.findById(theId));
+		ProductDto tempProductDto = productDtoMapper.productEntityToProductDtoMapper(productService.findById(theId));
 
 		int tempProductQuantity = 1;
 
@@ -49,6 +50,8 @@ public class ShoppingCartController {
 		return "redirect:/products/list";
 	}
 
+	*/
+
 	@GetMapping("/list")
 	public String listShoppingCart(Model theModel) {
 
@@ -57,10 +60,11 @@ public class ShoppingCartController {
 		return "shoppingcart/shoppingcart";
 	}
 	
+	/*
 	@GetMapping("/removeShoppingCartProduct")
 	public String removeShoppingCartProduct(@RequestParam("productId") int theId, Model theModel) {
 		
-		ProductDto tempProduct = productDtoMapper.ProductEntityToProductDtoMapper(productService.findById(theId));
+		ProductDto tempProduct = productDtoMapper.productEntityToProductDtoMapper(productService.findById(theId));
 
 		int tempProductQuantity = 1;
 
@@ -72,6 +76,8 @@ public class ShoppingCartController {
 		
 		return "shoppingcart/shoppingcart";
 	}
+	*/
+	
 	
 	@GetMapping("/removeAllShoppingCartProduct")
 	public String removeAllShoppingCartProduct(Model theModel) {

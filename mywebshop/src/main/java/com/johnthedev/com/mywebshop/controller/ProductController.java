@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Product;
+import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
 import com.johnthedev.com.mywebshop.service.ProductService;
 
 @Controller
@@ -27,12 +29,16 @@ public class ProductController {
 	
 	}
 	
+	@Autowired
+	public ProductDtoMapper productDtoMapper;
+	
 	@GetMapping("/list")
 	public String listProducts(Model theModel) {
 		
-		List<Product> theProducts = productService.findAll();
+		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
 		theModel.addAttribute("products", theProducts);
+		System.out.println(theProducts);
 		
 		return "products/list-products";
 	}
@@ -48,9 +54,14 @@ public class ProductController {
 	}
 	
 	@PostMapping("/save")
-	public String saveProduct(@ModelAttribute("product") Product theProduct) {
+	public String saveProduct(@ModelAttribute("product") ProductDto theProduct) {
 		
-		productService.save(theProduct);
+		Product product = new Product();
+		
+		product = productDtoMapper.producDtoToProductEntityMapper(theProduct);
+		
+		productService.save(product);
+		
 		
 		return "redirect:/products/list";
 	}
@@ -58,7 +69,7 @@ public class ProductController {
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("productId") int theId, Model theModel) {
 		
-		Product theProduct = productService.findById(theId);
+		ProductDto theProduct = productDtoMapper.productEntityToProductDtoMapper(productService.findById(theId));
 		
 		theModel.addAttribute("product",theProduct);
 		
