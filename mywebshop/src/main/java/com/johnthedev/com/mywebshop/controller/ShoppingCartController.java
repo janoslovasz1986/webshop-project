@@ -33,7 +33,7 @@ public class ShoppingCartController {
 	@Autowired
 	public ShoppingCart theShoppingCart;
 
-	/*
+	
 	@GetMapping("/addProductToShoppingCart")
 	public String addProductToShoppingCart(@RequestParam("productId") int theId, Model theModel) {
 
@@ -50,7 +50,7 @@ public class ShoppingCartController {
 		return "redirect:/products/list";
 	}
 
-	*/
+	
 
 	@GetMapping("/list")
 	public String listShoppingCart(Model theModel) {
@@ -60,7 +60,7 @@ public class ShoppingCartController {
 		return "shoppingcart/shoppingcart";
 	}
 	
-	/*
+	
 	@GetMapping("/removeShoppingCartProduct")
 	public String removeShoppingCartProduct(@RequestParam("productId") int theId, Model theModel) {
 		
@@ -76,7 +76,7 @@ public class ShoppingCartController {
 		
 		return "shoppingcart/shoppingcart";
 	}
-	*/
+	
 	
 	
 	@GetMapping("/removeAllShoppingCartProduct")

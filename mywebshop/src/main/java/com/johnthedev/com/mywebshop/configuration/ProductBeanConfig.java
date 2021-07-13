@@ -12,7 +12,7 @@ public class ProductBeanConfig {
 		
 		@Bean
 		//@RequestScope
-		//@Scope("prototype")
+		@Scope("prototype")
 		public Product product() {
 			
 			return new Product();

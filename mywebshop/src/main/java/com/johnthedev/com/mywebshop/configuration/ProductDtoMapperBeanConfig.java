@@ -3,6 +3,7 @@ package com.johnthedev.com.mywebshop.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
 
@@ -10,7 +11,8 @@ import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
 public class ProductDtoMapperBeanConfig {
 
 	@Bean
-	//@Scope("prototype")
+	//@SessionScope
+	@Scope("prototype")
 	public ProductDtoMapper productDtoMapper() {
 
 		return new ProductDtoMapper();

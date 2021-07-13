@@ -13,7 +13,7 @@ public class ProductDtoBeanConfig {
 
 	@Bean
 	//@RequestScope
-	//@Scope("prototype")
+	@Scope("prototype")
 	public ProductDto productDto() {
 		
 		return new ProductDto();

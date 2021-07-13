@@ -38,7 +38,7 @@ public class ProductController {
 		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
 		theModel.addAttribute("products", theProducts);
-		System.out.println(theProducts);
+		
 		
 		return "products/list-products";
 	}

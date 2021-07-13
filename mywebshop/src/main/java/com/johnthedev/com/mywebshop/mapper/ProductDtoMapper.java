@@ -20,6 +20,8 @@ public class ProductDtoMapper {
 
 	public ProductDto productEntityToProductDtoMapper(Product theProduct) {
 
+		theProductDto = new ProductDto();
+
 		theProductDto.setId(theProduct.getId());
 		theProductDto.setProductName(theProduct.getProductName());
 		theProductDto.setProductPrice(theProduct.getProductPrice());
@@ -29,35 +31,11 @@ public class ProductDtoMapper {
 	}
 
 	public List<ProductDto> productEntityListToProductDtoListMapper(List<Product> theProducts) {
-		
-		System.out.println("***" + theProducts + "****");
 
-		//return theProducts.stream()
-		//		.map(x -> productEntityToProductDtoMapper(x))
-		//		.collect(Collectors.toList());
-		
-		List<ProductDto> tempDtoList = new ArrayList<ProductDto>();
-		
-		for(int i=0; i<theProducts.size(); i++) {
-			
-			System.out.println("for "+ i +". cuklus: ");
-			
-			ProductDto productDto = null;
-			
-			productDto = productEntityToProductDtoMapper(theProducts.get(i));
-			
-			//tempDtoList.add(productDto);
-			
-			tempDtoList.add(productDto);
-			
-			System.out.println(tempDtoList);
-			
-		}
-		System.out.println("+++" + tempDtoList + "+++");
-		
-		return tempDtoList;
+		return theProducts.stream()
+				.map(x -> productEntityToProductDtoMapper(x))
+				.collect(Collectors.toList());
 
-		
 	}
 
 	public Product producDtoToProductEntityMapper(ProductDto theProductDto) {
@@ -69,13 +47,11 @@ public class ProductDtoMapper {
 
 		return theProduct;
 	}
-	
+
 	public List<Product> producDtoToListProductEntityListMapper(List<ProductDto> theProductDtos) {
 
-		return theProductDtos.stream()
-				.map(x -> producDtoToProductEntityMapper(x))
-				.collect(Collectors.toList());
-						
+		return theProductDtos.stream().map(x -> producDtoToProductEntityMapper(x)).collect(Collectors.toList());
+
 	}
 
 }
