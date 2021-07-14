@@ -39,6 +39,8 @@ public class ProductDtoMapper {
 	}
 
 	public Product producDtoToProductEntityMapper(ProductDto theProductDto) {
+		
+		theProduct = new Product();
 
 		theProduct.setId(theProductDto.getId());
 		theProduct.setProductName(theProductDto.getProductName());

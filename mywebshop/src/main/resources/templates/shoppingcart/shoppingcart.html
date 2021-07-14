@@ -33,42 +33,54 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="tempShoppingCartLine : ${shoppingCart.listOfShoppingCartProducts}">
+				<tr
+					th:each="tempShoppingCartLine : ${shoppingCart.listOfShoppingCartProducts}">
 
-					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.productName}" />
-					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.productPrice}" />
-					<td th:text="${tempShoppingCartLine.inShoppingCartProduct.Discount}" />
+					<td
+						th:text="${tempShoppingCartLine.inShoppingCartProduct.productName}" />
+					<td
+						th:text="${tempShoppingCartLine.inShoppingCartProduct.productPrice}" />
+					<td
+						th:text="${tempShoppingCartLine.inShoppingCartProduct.Discount}" />
 					<td th:text="${tempShoppingCartLine.inShoppingCartProductQuantity}" />
 					<td th:text="${tempShoppingCartLine.getAmount()}" />
-					<td> 
-					<a th:href="@{/shoppingcart/removeShoppingCartProduct(productId=${tempShoppingCartLine.inShoppingCartProduct.id})}" 
-						class="btn btn-info btn-sm">
-						Remove
-						</a>
-					</td>
+					<td><a
+						th:href="@{/shoppingcart/removeShoppingCartProduct(productId=${tempShoppingCartLine.inShoppingCartProduct.id})}"
+						class="btn btn-info btn-sm"> Remove </a></td>
 				</tr>
 				<td th:text="'Sum Price:'" />
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td th:text="${shoppingCart.calcSumPrice()}" />			
-				<td> 
-					<a th:href="@{/shoppingcart/removeAllShoppingCartProduct}" 
-						class="btn btn-info btn-sm">
-						Remove All
-					</a>
-				</td>							
+				<td></td>
+				<td></td>
+				<td></td>
+				<td th:text="${shoppingCart.calcSumPrice()}" />
+				<td><a th:href="@{/shoppingcart/removeAllShoppingCartProduct}"
+					class="btn btn-info btn-sm"> Remove All </a></td>
 
 			</tbody>
 		</table>
-		<!-- 
+		 
 		<div>
-			<a th:href="/orders/save"
+			<!-- <a th:href="@{/orders/save(order=${shoppingCart})}"  -->
+			<a th:href="@{/orders/save}"
 			class="btn btn-info btn-sm"> Go to Checkout</a>
 		</div>
+		  
+
+		<!-- 
+		<div class="container">
+
+			<form action="#" th:action="@{/orders/save}"
+				th:object="${shoppingCart}" method="POST">
+
+
+				<button type="submit" class="btn btn-info col-2">Chackout</button>
+
+			</form>
+		</div>
 		 -->
+		
 	</div>
-	
+
 	<a href="/products/list">Back to Product List</a>
 </body>
 </html>

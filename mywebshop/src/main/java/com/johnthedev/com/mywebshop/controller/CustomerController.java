@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.johnthedev.com.mywebshop.dto.CustomerDto;
 import com.johnthedev.com.mywebshop.entity.Customer;
+import com.johnthedev.com.mywebshop.mapper.CustomerDtoMapper;
 import com.johnthedev.com.mywebshop.service.CustomerService;
 
 @Controller
@@ -26,11 +28,14 @@ public class CustomerController {
 		customerService = theCustomerService;
 	}
 	
+	@Autowired
+	public CustomerDtoMapper customerDtoMapper;
+	
 	
 	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
 		
-		List<Customer> theCustomers = customerService.findAll();
+		List<CustomerDto> theCustomers = customerDtoMapper.customerEntityListToCustomerDtoListMapper(customerService.findAll());
 		
 		theModel.addAttribute("customers", theCustomers);
 		
@@ -40,7 +45,7 @@ public class CustomerController {
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("customerId") int theId, Model theModel) {
 		
-		Customer theCustomer = customerService.findById(theId);
+		CustomerDto theCustomer = customerDtoMapper.customerEntityToCustomerDtoMapper(customerService.findById(theId));
 		
 		theModel.addAttribute("customer", theCustomer);
 		
@@ -50,7 +55,7 @@ public class CustomerController {
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		
-		Customer theCustomer = new Customer();
+		CustomerDto theCustomer = new CustomerDto();
 		
 		theModel.addAttribute("customer", theCustomer);
 		
@@ -59,9 +64,9 @@ public class CustomerController {
 	
 	
 	@PostMapping("/save")
-	public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
+	public String saveCustomer(@ModelAttribute("customer") CustomerDto theCustomer) {
 		
-		customerService.save(theCustomer);
+		customerService.save(customerDtoMapper.customerDtoToCustomerEntityMapper(theCustomer));
 		
 		return "redirect:/customers/list";
 	}

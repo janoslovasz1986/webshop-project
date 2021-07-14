@@ -20,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return orderRepository.findAll();
 	}
 
 	@Override
