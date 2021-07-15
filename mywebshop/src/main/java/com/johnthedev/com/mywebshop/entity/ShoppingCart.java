@@ -3,11 +3,17 @@ package com.johnthedev.com.mywebshop.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCart {
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
+public class ShoppingCart{
 
 	private int id;
 	
+	@Embedded
 	private List<ShoppingCartItem> listOfShoppingCartProducts = new ArrayList<ShoppingCartItem>();
+	
 
 	public ShoppingCart() {
 

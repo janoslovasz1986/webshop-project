@@ -47,7 +47,6 @@ public class OrderController {
 	}
 	
 	@GetMapping("/save")
-	//public String saveOrder(@ModelAttribute("order") ShoppingCart theShoppingCart) {
 	public String saveOrder(Model theModel) {
 	
 		theShoppingCart.setId(1);
@@ -62,12 +61,8 @@ public class OrderController {
 		
 		System.out.println(orderDto);
 	
-		
-		
 		orderService.save(orderDtoMapper.orderDtoToOrderEntityMapper(orderDto));
-		
-		
-		
+			
 		return "list-orders";
 	}
 

@@ -1,12 +1,14 @@
 package com.johnthedev.com.mywebshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.johnthedev.com.mywebshop.dao.OrderRepository;
 import com.johnthedev.com.mywebshop.entity.Order;
+import com.johnthedev.com.mywebshop.entity.Product;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,8 +28,17 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order findById(int theId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Order> result = orderRepository.findById(theId);
+		
+		Order theOrder = null;
+		
+		if(result.isPresent()) {
+			theOrder =  result.get();
+		} else {
+			throw new RuntimeException("Order id not found: \" + theId");
+		}
+		return theOrder;
 	}
 
 	@Override

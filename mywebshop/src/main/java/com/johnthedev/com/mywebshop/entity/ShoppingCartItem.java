@@ -1,8 +1,11 @@
 package com.johnthedev.com.mywebshop.entity;
 
+import javax.persistence.Embeddable;
+
 import com.johnthedev.com.mywebshop.dto.ProductDto;
 
-public class ShoppingCartItem {
+@Embeddable
+public class ShoppingCartItem{
 
 	private ProductDto inShoppingCartProduct;
 	private int inShoppingCartProductQuantity;

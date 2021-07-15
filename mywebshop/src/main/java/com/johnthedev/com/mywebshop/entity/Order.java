@@ -1,11 +1,11 @@
 package com.johnthedev.com.mywebshop.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,15 +15,14 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="order_id")
 	private int id; 
 	
 	//@OneToOne(mappedBy = "customer")
 	@Transient
 	private Customer customer;
 	
-	//@OneToOne(mappedBy = "id")
-	@Transient
+	@Embedded
 	private ShoppingCart shoppingCart;
 	
 	
