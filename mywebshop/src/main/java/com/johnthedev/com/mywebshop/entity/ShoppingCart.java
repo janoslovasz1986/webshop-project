@@ -3,55 +3,73 @@ package com.johnthedev.com.mywebshop.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.JoinColumn;
 
 @Embeddable
 public class ShoppingCart{
-
-	private int id;
 	
-	@Embedded
+	
+	@ElementCollection
+	@CollectionTable(name = "list_of_shoppingcart_products" , joinColumns =  @JoinColumn(name= "order_id"))
 	private List<ShoppingCartItem> listOfShoppingCartProducts = new ArrayList<ShoppingCartItem>();
-	
 
 	public ShoppingCart() {
 
 	}
 
+
 	public ShoppingCart(List<ShoppingCartItem> listOfShoppingCartProducts) {
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
 
-	public ShoppingCart(int id, List<ShoppingCartItem> listOfShoppingCartProducts) {
-		this.id = id;
-		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
-	}
 
 	public List<ShoppingCartItem> getListOfShoppingCartProducts() {
 		return listOfShoppingCartProducts;
 	}
 
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((listOfShoppingCartProducts == null) ? 0 : listOfShoppingCartProducts.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShoppingCart other = (ShoppingCart) obj;
+		if (listOfShoppingCartProducts == null) {
+			if (other.listOfShoppingCartProducts != null)
+				return false;
+		} else if (!listOfShoppingCartProducts.equals(other.listOfShoppingCartProducts))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "ShoppingCart [listOfShoppingCartProducts=" + listOfShoppingCartProducts + "]";
+	}
+
+
 	public void setListOfShoppingCartProducts(List<ShoppingCartItem> listOfShoppingCartProducts) {
 		this.listOfShoppingCartProducts = listOfShoppingCartProducts;
 	}
 
-	
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "ShoppingCart [id=" + id + ", listOfShoppingCartProducts=" + listOfShoppingCartProducts + "]";
-	}
 
 	public void addProduct(ShoppingCartItem shoppingCartItem) {
 
@@ -123,30 +141,4 @@ public class ShoppingCart{
 
 		return sum;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((listOfShoppingCartProducts == null) ? 0 : listOfShoppingCartProducts.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ShoppingCart other = (ShoppingCart) obj;
-		if (listOfShoppingCartProducts == null) {
-			if (other.listOfShoppingCartProducts != null)
-				return false;
-		} else if (!listOfShoppingCartProducts.equals(other.listOfShoppingCartProducts))
-			return false;
-		return true;
-	}
-
 }

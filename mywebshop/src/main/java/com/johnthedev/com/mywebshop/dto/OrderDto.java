@@ -8,6 +8,7 @@ public class OrderDto {
 	private int id; 
 	private Customer customer;
 	private ShoppingCart shoppingCart;
+	private String address;
 	
 	
 	public OrderDto() {
@@ -24,6 +25,16 @@ public class OrderDto {
 		this.customer = customer;
 		this.shoppingCart = shoppingCart;
 	}
+
+	
+	
+	public OrderDto(int id, Customer customer, ShoppingCart shoppingCart, String address) {
+		this.id = id;
+		this.customer = customer;
+		this.shoppingCart = shoppingCart;
+		this.address = address;
+	}
+	
 
 	public int getId() {
 		return id;
@@ -47,6 +58,16 @@ public class OrderDto {
 
 	public void setShoppingCart(ShoppingCart shoppingCart) {
 		this.shoppingCart = shoppingCart;
+	}
+	
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override

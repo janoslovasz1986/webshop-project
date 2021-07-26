@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.johnthedev.com.mywebshop.dao.OrderRepository;
 import com.johnthedev.com.mywebshop.entity.Order;
-import com.johnthedev.com.mywebshop.entity.Product;
 
 @Service
 public class OrderServiceImpl implements OrderService {

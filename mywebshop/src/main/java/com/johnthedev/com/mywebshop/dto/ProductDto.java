@@ -1,8 +1,15 @@
 package com.johnthedev.com.mywebshop.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class ProductDto {
 	
+	@Column(name="product_id")
 	private int id;
+	
+	@Column(name="product_name")
 	private String productName;
 	private double productPrice;
 	private double discount;
@@ -12,6 +19,14 @@ public class ProductDto {
 
 	public ProductDto(int id, String productName, double productPrice, double discount) {
 		this.id = id;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discount = discount;
+	}
+	
+	
+
+	public ProductDto(String productName, double productPrice, double discount) {
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.discount = discount;

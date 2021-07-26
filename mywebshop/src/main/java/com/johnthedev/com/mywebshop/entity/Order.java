@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="order")
+@Table(name="shoppingcart_order")
 public class Order {
 	
 	@Id
@@ -18,12 +18,15 @@ public class Order {
 	@Column(name="order_id")
 	private int id; 
 	
-	//@OneToOne(mappedBy = "customer")
 	@Transient
 	private Customer customer;
 	
+	@Column(name = "customer_id")
+	private int customerId;
+	
 	@Embedded
 	private ShoppingCart shoppingCart;
+
 	
 	
 	
@@ -35,7 +38,7 @@ public class Order {
 		this.customer = customer;
 		this.shoppingCart = shoppingCart;
 	}
-	
+		
 
 	public int getId() {
 		return id;
@@ -60,7 +63,14 @@ public class Order {
 	public void setShoppingCart(ShoppingCart shoppingCart) {
 		this.shoppingCart = shoppingCart;
 	}
-	
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 
 	@Override
 	public String toString() {

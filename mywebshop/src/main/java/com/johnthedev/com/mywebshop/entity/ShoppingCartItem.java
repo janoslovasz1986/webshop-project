@@ -1,5 +1,6 @@
 package com.johnthedev.com.mywebshop.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import com.johnthedev.com.mywebshop.dto.ProductDto;
@@ -7,7 +8,10 @@ import com.johnthedev.com.mywebshop.dto.ProductDto;
 @Embeddable
 public class ShoppingCartItem{
 
-	private ProductDto inShoppingCartProduct;
+	//@Embedded
+	private ProductDto inShoppingCartProduct = new ProductDto();
+	
+	@Column(name="in_shoppingcart_product_quantity")
 	private int inShoppingCartProductQuantity;
 	
 	public ShoppingCartItem() {		
@@ -34,13 +38,17 @@ public class ShoppingCartItem{
 		this.inShoppingCartProductQuantity = inShoppingCartProductQuantity;
 	}
 
+	
+	
+	
 	@Override
 	public String toString() {
 		return "ShoppingCartItem [inShoppingCartProduct=" + inShoppingCartProduct + ", inShoppingCartProductQuantity="
 				+ inShoppingCartProductQuantity + "]";
 	}
-	
-	
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

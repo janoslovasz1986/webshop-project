@@ -1,69 +1,58 @@
 package com.johnthedev.com.mywebshop.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.johnthedev.com.mywebshop.dto.OrderDto;
 import com.johnthedev.com.mywebshop.entity.Customer;
+import com.johnthedev.com.mywebshop.entity.Order;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
-import com.johnthedev.com.mywebshop.mapper.OrderDtoMapper;
 import com.johnthedev.com.mywebshop.service.OrderService;
 
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
-	
+
 	private OrderService orderService;
-	
+
 	@Autowired
 	public OrderController(OrderService theOrderService) {
-		orderService=theOrderService;
+		orderService = theOrderService;
 	}
-	
+
 	@Autowired
 	public ShoppingCart theShoppingCart;
-	
-	//@Autowired
-	//public Customer theCustomer;
-	
-	@Autowired
-	public OrderDtoMapper orderDtoMapper;
-	
+
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
-		
-		List<OrderDto> theOrders = orderDtoMapper.orderEntityListToOrderDtoListMapper(orderService.findAll());
-		
-		theModel.addAttribute("products", theOrders);
-		
-		
+
+		// List<OrderDto> theOrders =
+		// orderDtoMapper.orderEntityListToOrderDtoListMapper(orderService.findAll());
+
+		// theModel.addAttribute("products", theOrders);
+
 		return "products/list-products";
 	}
-	
+
 	@GetMapping("/save")
-	public String saveOrder(Model theModel) {
-	
-		theShoppingCart.setId(1);
-		System.out.println(theShoppingCart);
-		
+	public String saveOrder() {
+
 		Customer tempCustomer = new Customer(11, "Jack", "Hopkins", "jackie@gmail.com");
 		
-		OrderDto orderDto = new OrderDto(); 
+		ShoppingCart tShoppingCart = new ShoppingCart();
+
+		tShoppingCart.setListOfShoppingCartProducts(theShoppingCart.getListOfShoppingCartProducts());
 		
-		orderDto.setCustomer(tempCustomer);
-		orderDto.setShoppingCart(theShoppingCart);
+		Order order = new Order();
+		order.setCustomer(tempCustomer);
+		order.setCustomerId(111);
+		order.setShoppingCart(tShoppingCart);
 		
-		System.out.println(orderDto);
-	
-		orderService.save(orderDtoMapper.orderDtoToOrderEntityMapper(orderDto));
-			
-		return "list-orders";
+		orderService.save(order);
+		
+		return "";
 	}
 
 }

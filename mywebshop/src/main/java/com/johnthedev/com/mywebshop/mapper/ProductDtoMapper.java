@@ -1,6 +1,5 @@
 package com.johnthedev.com.mywebshop.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
