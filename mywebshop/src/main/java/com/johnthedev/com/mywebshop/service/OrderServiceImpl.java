@@ -1,5 +1,6 @@
 package com.johnthedev.com.mywebshop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,17 @@ public class OrderServiceImpl implements OrderService {
 			throw new RuntimeException("Order id not found: \" + theId");
 		}
 		return theOrder;
+	}
+	
+	@Override
+	public Order findLast() {
+		
+		List<Order> result = new ArrayList<Order>();
+		
+		result = orderRepository.findAll();
+		
+		return result.get(result.size()-1);
+		
 	}
 
 	@Override

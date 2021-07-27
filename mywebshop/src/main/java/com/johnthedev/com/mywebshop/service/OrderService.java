@@ -14,4 +14,6 @@ public interface OrderService {
 	
 	public void deleteById(int id);
 
+	public Order findLast();
+
 }

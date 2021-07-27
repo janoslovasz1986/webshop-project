@@ -1,5 +1,7 @@
 package com.johnthedev.com.mywebshop.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +30,11 @@ public class OrderController {
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
 
-		// List<OrderDto> theOrders =
-		// orderDtoMapper.orderEntityListToOrderDtoListMapper(orderService.findAll());
+		Order theOrders = orderService.findLast();
 
-		// theModel.addAttribute("products", theOrders);
+		theModel.addAttribute("order", theOrders);
 
-		return "products/list-products";
+		return "orders/list-order";
 	}
 
 	@GetMapping("/save")
@@ -52,7 +53,7 @@ public class OrderController {
 		
 		orderService.save(order);
 		
-		return "";
+		return "redirect:/orders/list";
 	}
 
 }

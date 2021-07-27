@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xlmns:th="http:/www.thymeleaf.org">
+<head>
+<title>Order directory</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container">
+
+		<h3>Order list</h3>
+
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Order Id</th>
+					<th>Customer Id</th>
+					<th>Product Name</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="tempOrder : ${order}">
+					<td th:text="${tempOrder.id}" />
+					<td th:text="${tempOrder.customerId}" />
+					<td th:text="${tempOrder.shoppingcart.listOfShoppingCartProducts.productName}" />
+					<!--  <td th:text="${tempCustomer.email}" />  -->
+					<!-- <td><a
+						th:href="@{/customers/delete(customerId=${tempCustomer.id})}"
+						class="btn btn-info btn-sm"> Delete </a></td>
+					 -->
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
