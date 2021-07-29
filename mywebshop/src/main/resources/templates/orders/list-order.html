@@ -26,6 +26,8 @@
 					<th>Order Id</th>
 					<th>Customer Id</th>
 					<th>Product Name</th>
+					<th>Product Price</th>
+					<th>Order Status</th>
 				</tr>
 			</thead>
 
@@ -33,16 +35,28 @@
 				<tr th:each="tempOrder : ${order}">
 					<td th:text="${tempOrder.id}" />
 					<td th:text="${tempOrder.customerId}" />
-					<td th:text="${tempOrder.shoppingcart.listOfShoppingCartProducts.productName}" />
-					<!--  <td th:text="${tempCustomer.email}" />  -->
-					<!-- <td><a
-						th:href="@{/customers/delete(customerId=${tempCustomer.id})}"
-						class="btn btn-info btn-sm"> Delete </a></td>
-					 -->
+					
+					  <!-- <td th:text="${tempOrder.shoppingCart.listOfShoppingCartProducts}" />  -->
+					
+					<td> 
+						<div
+							th:each="tempShoppingCartLine : ${order.shoppingCart.listOfShoppingCartProducts}">
+								<span th:text="${tempShoppingCartLine.inShoppingCartProduct.productName}" />
+						</div>
+					</td>
+					
+					<td> 
+						<div
+							th:each="tempShoppingCartLine : ${order.shoppingCart.listOfShoppingCartProducts}">
+								<span th:text="${tempShoppingCartLine.inShoppingCartProduct.productPrice}" />
+						</div>
+					</td>
+					<td th:text="${tempOrder.orderStatus}" />
 				</tr>
 			</tbody>
 		</table>
 
 	</div>
+	<a href="/products/list">Back to Product List</a>
 </body>
 </html>

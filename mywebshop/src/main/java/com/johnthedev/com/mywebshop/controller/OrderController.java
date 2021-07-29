@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.Order;
+import com.johnthedev.com.mywebshop.entity.OrderStatus;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 import com.johnthedev.com.mywebshop.service.OrderService;
 
@@ -50,7 +51,8 @@ public class OrderController {
 		order.setCustomer(tempCustomer);
 		order.setCustomerId(111);
 		order.setShoppingCart(tShoppingCart);
-		
+		order.setOrderStatus(OrderStatus.MODIFIABLE);
+	
 		orderService.save(order);
 		
 		return "redirect:/orders/list";

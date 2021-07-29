@@ -3,6 +3,8 @@ package com.johnthedev.com.mywebshop.entity;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +28,10 @@ public class Order {
 	
 	@Embedded
 	private ShoppingCart shoppingCart;
+	
+	@Column(name="order_status")
+	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;
 
 	
 	
@@ -38,7 +44,24 @@ public class Order {
 		this.customer = customer;
 		this.shoppingCart = shoppingCart;
 	}
+	
+	
 		
+
+	public Order(Customer customer, int customerId, ShoppingCart shoppingCart, OrderStatus orderStatus) {
+		this.customer = customer;
+		this.customerId = customerId;
+		this.shoppingCart = shoppingCart;
+		this.orderStatus = orderStatus;
+	}
+	
+	
+
+	public Order(Customer customer, ShoppingCart shoppingCart, OrderStatus orderStatus) {
+		this.customer = customer;
+		this.shoppingCart = shoppingCart;
+		this.orderStatus = orderStatus;
+	}
 
 	public int getId() {
 		return id;
@@ -70,6 +93,16 @@ public class Order {
 
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
+	}
+
+	
+	
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	@Override
