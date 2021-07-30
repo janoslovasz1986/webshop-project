@@ -25,6 +25,9 @@ public class Product {
 	@Column(name="discount")
 	private double discount;
 	
+	@Column(name="in_stock_quantity")
+	private int inStockQuantity;
+	
 	public Product() {
 		
 	}
@@ -40,6 +43,16 @@ public class Product {
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.discount = discount;
+	}
+	
+	
+
+	public Product(int id, String productName, double productPrice, double discount, int inStockQuantity) {
+		this.id = id;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discount = discount;
+		this.inStockQuantity = inStockQuantity;
 	}
 
 	public int getId() {
@@ -72,6 +85,16 @@ public class Product {
 
 	public void setDiscount(double discount) {
 		this.discount = discount;
+	}
+	
+	
+
+	public int getInStockQuantity() {
+		return inStockQuantity;
+	}
+
+	public void setInStockQuantity(int inStockQuantity) {
+		this.inStockQuantity = inStockQuantity;
 	}
 
 	@Override

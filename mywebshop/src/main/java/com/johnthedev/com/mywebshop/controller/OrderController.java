@@ -1,6 +1,9 @@
 package com.johnthedev.com.mywebshop.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,9 @@ import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.Order;
 import com.johnthedev.com.mywebshop.entity.OrderStatus;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
+import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 import com.johnthedev.com.mywebshop.service.OrderService;
+import com.johnthedev.com.mywebshop.service.ProductService;
 
 @Controller
 @RequestMapping("/orders")
@@ -27,6 +32,9 @@ public class OrderController {
 
 	@Autowired
 	public ShoppingCart theShoppingCart;
+	
+	@Autowired
+	public ProductService productService;
 
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
@@ -54,6 +62,14 @@ public class OrderController {
 		order.setOrderStatus(OrderStatus.MODIFIABLE);
 	
 		orderService.save(order);
+		
+		
+		Map<Integer, Integer> soldProducts= new HashMap<Integer, Integer>();
+		
+		List<ShoppingCartItem> soldShoppingCartItems= new ArrayList<ShoppingCartItem>();
+		soldShoppingCartItems = tShoppingCart.getListOfShoppingCartProducts();
+		
+		
 		
 		return "redirect:/orders/list";
 	}

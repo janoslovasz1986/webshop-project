@@ -13,6 +13,7 @@ public class ProductDto {
 	private String productName;
 	private double productPrice;
 	private double discount;
+	private int inStockQuantity;
 	
 	public ProductDto() {
 	}
@@ -24,7 +25,13 @@ public class ProductDto {
 		this.discount = discount;
 	}
 	
-	
+	public ProductDto(int id, String productName, double productPrice, double discount, int inStockQuantity) {
+		this.id = id;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discount = discount;
+		this.inStockQuantity = inStockQuantity;
+	}
 
 	public ProductDto(String productName, double productPrice, double discount) {
 		this.productName = productName;
@@ -62,6 +69,16 @@ public class ProductDto {
 
 	public void setDiscount(double discount) {
 		this.discount = discount;
+	}
+	
+	
+
+	public int getInStockQuantity() {
+		return inStockQuantity;
+	}
+
+	public void setInStockQuantity(int inStockQuantity) {
+		this.inStockQuantity = inStockQuantity;
 	}
 
 	@Override

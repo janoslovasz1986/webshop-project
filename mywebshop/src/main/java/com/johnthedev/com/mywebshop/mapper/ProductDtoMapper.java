@@ -25,6 +25,7 @@ public class ProductDtoMapper {
 		theProductDto.setProductName(theProduct.getProductName());
 		theProductDto.setProductPrice(theProduct.getProductPrice());
 		theProductDto.setDiscount(theProduct.getDiscount());
+		theProductDto.setInStockQuantity(theProduct.getInStockQuantity());
 
 		return theProductDto;
 	}
@@ -45,6 +46,7 @@ public class ProductDtoMapper {
 		theProduct.setProductName(theProductDto.getProductName());
 		theProduct.setProductPrice(theProductDto.getProductPrice());
 		theProduct.setDiscount(theProductDto.getDiscount());
+		theProduct.setInStockQuantity(theProductDto.getInStockQuantity());
 
 		return theProduct;
 	}

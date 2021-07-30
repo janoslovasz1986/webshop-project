@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xlmns:th="http:/www.thymeleaf.org">
 <head>
-	<title>Customer directory</title>
+	<title>Products</title>
 	
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -29,6 +29,7 @@
 					<th>Product Name</th>
 					<th>Product Price</th>
 					<th>Discount</th>
+					<th>In stock quantity</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -38,6 +39,7 @@
 					<td th:text="${tempProduct.productName}"/>
 					<td th:text="${tempProduct.productPrice}"/>
 					<td th:text="${tempProduct.discount}"/>
+					<td th:text="${tempProduct.inStockQuantity}"/>
 					<td>
 						<a th:href="@{/shoppingcart/addProductToShoppingCart(productId=${tempProduct.id})}" 
 						class="btn btn-info btn-sm">
