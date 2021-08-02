@@ -97,9 +97,12 @@ public class Product {
 		this.inStockQuantity = inStockQuantity;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", productName=" + productName + ", productPrice=" + productPrice + ", discount=" + discount + "]";
+		return "Product [id=" + id + ", productName=" + productName + ", productPrice=" + productPrice + ", discount="
+				+ discount + ", inStockQuantity=" + inStockQuantity + "]";
 	}
 
 	@Override

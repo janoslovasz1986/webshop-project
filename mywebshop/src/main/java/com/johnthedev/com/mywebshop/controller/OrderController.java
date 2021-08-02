@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.Order;
 import com.johnthedev.com.mywebshop.entity.OrderStatus;
+import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 import com.johnthedev.com.mywebshop.service.OrderService;
@@ -69,7 +71,28 @@ public class OrderController {
 		List<ShoppingCartItem> soldShoppingCartItems= new ArrayList<ShoppingCartItem>();
 		soldShoppingCartItems = tShoppingCart.getListOfShoppingCartProducts();
 		
+		for(ShoppingCartItem sci : soldShoppingCartItems) {
+			System.out.println(sci.getInShoppingCartProduct().getProductName());
+			soldProducts.put(sci.getInShoppingCartProduct().getId(), sci.getInShoppingCartProductQuantity());
+		}
 		
+		List<Product> soldProductsToDecreaseQuantity = new ArrayList<Product>();
+		soldProductsToDecreaseQuantity=null;
+		
+		soldProductsToDecreaseQuantity = productService.findAll();
+		
+		for(Product tempProduct : soldProductsToDecreaseQuantity) {
+			if (soldProducts.containsKey(tempProduct.getId())){
+				tempProduct.setInStockQuantity(tempProduct.getInStockQuantity() - (soldProducts.get(tempProduct.getId())));
+			}
+		}
+		
+		for(Product tempProduct : soldProductsToDecreaseQuantity) {
+				
+			productService.save(tempProduct);
+		
+		}
+
 		
 		return "redirect:/orders/list";
 	}

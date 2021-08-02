@@ -11,8 +11,11 @@ public class ProductDto {
 	
 	@Column(name="product_name")
 	private String productName;
+	
 	private double productPrice;
 	private double discount;
+	
+	@Column(name="in_stock_quantity")
 	private int inStockQuantity;
 	
 	public ProductDto() {
