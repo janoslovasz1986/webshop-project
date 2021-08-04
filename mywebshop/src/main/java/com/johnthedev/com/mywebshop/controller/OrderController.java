@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Customer;
@@ -46,6 +47,16 @@ public class OrderController {
 		theModel.addAttribute("order", theOrders);
 
 		return "orders/list-order";
+	}
+	
+	@GetMapping("/listorders")
+	public String listAllOrders(Model theModel) {
+
+		List<Order> theOrders = orderService.findAll();
+
+		theModel.addAttribute("order", theOrders);
+
+		return "orders/list-orders";
 	}
 
 	@GetMapping("/save")
@@ -94,7 +105,19 @@ public class OrderController {
 		}
 
 		
-		return "redirect:/orders/list";
+		return "redirect:/orders/listorders";
+	}
+	
+	@GetMapping("/approve")
+	public String approveOrder(@RequestParam("orderId") int theId) {
+		
+		Order tempOrder = new Order();
+		
+		tempOrder = orderService.findById(theId);
+		
+		//tempOrder.setOrderStatus();
+		
+		return "redirect:/customers/list";
 	}
 
 }

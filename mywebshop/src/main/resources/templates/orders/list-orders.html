@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xlmns:th="http:/www.thymeleaf.org">
+<head>
+<title>Order directory</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container">
+
+		<h3>Order all list</h3>
+
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Order Id</th>
+					<th>Customer Id</th>
+					<th>Product Name</th>
+					<th>Product Price</th>
+					<th>Order Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="tempOrder : ${order}">
+					<td th:text="${tempOrder.id}" />
+					<td th:text="${tempOrder.customerId}" />
+					
+					<td> 
+						<div
+							th:each="tempShoppingCartLine : ${tempOrder.shoppingCart.listOfShoppingCartProducts}">
+								<span th:text="${tempShoppingCartLine.inShoppingCartProduct.productName}" />
+						</div>
+					</td>
+					 
+					 
+					<td> 
+						<div
+							th:each="tempShoppingCartLine : ${tempOrder.shoppingCart.listOfShoppingCartProducts}">
+								<span th:text="${tempShoppingCartLine.inShoppingCartProduct.productPrice}" />
+						</div>
+					</td>
+					<td th:text="${tempOrder.orderStatus}" />
+					<td>
+						Valid
+					|
+						Close on CR
+					</td>
+					
+					 
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<a href="/products/list">Back to Product List</a>
+</body>
+</html>
