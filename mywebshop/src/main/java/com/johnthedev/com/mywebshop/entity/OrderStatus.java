@@ -3,7 +3,7 @@ package com.johnthedev.com.mywebshop.entity;
 public enum OrderStatus {
 	
 	MODIFIABLE,
-	FINALIZED,
+	APPROVED,
 	UNDERDELIVERY,
 	DELIVERED,
 	DELETED

@@ -35,7 +35,7 @@ public class OrderController {
 
 	@Autowired
 	public ShoppingCart theShoppingCart;
-	
+
 	@Autowired
 	public ProductService productService;
 
@@ -48,7 +48,7 @@ public class OrderController {
 
 		return "orders/list-order";
 	}
-	
+
 	@GetMapping("/listorders")
 	public String listAllOrders(Model theModel) {
 
@@ -63,61 +63,111 @@ public class OrderController {
 	public String saveOrder() {
 
 		Customer tempCustomer = new Customer(11, "Jack", "Hopkins", "jackie@gmail.com");
-		
+
 		ShoppingCart tShoppingCart = new ShoppingCart();
 
 		tShoppingCart.setListOfShoppingCartProducts(theShoppingCart.getListOfShoppingCartProducts());
-		
+
 		Order order = new Order();
 		order.setCustomer(tempCustomer);
 		order.setCustomerId(111);
 		order.setShoppingCart(tShoppingCart);
 		order.setOrderStatus(OrderStatus.MODIFIABLE);
-	
+
 		orderService.save(order);
-		
-		
-		Map<Integer, Integer> soldProducts= new HashMap<Integer, Integer>();
-		
-		List<ShoppingCartItem> soldShoppingCartItems= new ArrayList<ShoppingCartItem>();
+
+		Map<Integer, Integer> soldProducts = new HashMap<Integer, Integer>();
+
+		List<ShoppingCartItem> soldShoppingCartItems = new ArrayList<ShoppingCartItem>();
 		soldShoppingCartItems = tShoppingCart.getListOfShoppingCartProducts();
-		
-		for(ShoppingCartItem sci : soldShoppingCartItems) {
-			System.out.println(sci.getInShoppingCartProduct().getProductName());
+
+		for (ShoppingCartItem sci : soldShoppingCartItems) {
 			soldProducts.put(sci.getInShoppingCartProduct().getId(), sci.getInShoppingCartProductQuantity());
 		}
-		
+
 		List<Product> soldProductsToDecreaseQuantity = new ArrayList<Product>();
-		soldProductsToDecreaseQuantity=null;
-		
+		soldProductsToDecreaseQuantity = null;
+
 		soldProductsToDecreaseQuantity = productService.findAll();
-		
-		for(Product tempProduct : soldProductsToDecreaseQuantity) {
-			if (soldProducts.containsKey(tempProduct.getId())){
-				tempProduct.setInStockQuantity(tempProduct.getInStockQuantity() - (soldProducts.get(tempProduct.getId())));
+
+		for (Product tempProduct : soldProductsToDecreaseQuantity) {
+			if (soldProducts.containsKey(tempProduct.getId())) {
+				tempProduct
+						.setInStockQuantity(tempProduct.getInStockQuantity() - (soldProducts.get(tempProduct.getId())));
 			}
 		}
-		
-		for(Product tempProduct : soldProductsToDecreaseQuantity) {
-				
+
+		for (Product tempProduct : soldProductsToDecreaseQuantity) {
+
 			productService.save(tempProduct);
-		
+
 		}
 
+		return "redirect:/orders/listorders";
+	}
+
+	@GetMapping("/approve")
+	public String approveOrder(@RequestParam("orderId") int theId) {
+
+		Order tempOrder = new Order();
+
+		tempOrder = orderService.findById(theId);
+
+		if (tempOrder.getOrderStatus() == OrderStatus.MODIFIABLE) {
+
+			tempOrder.setOrderStatus(OrderStatus.APPROVED);
+
+			orderService.save(tempOrder);
+			
+		}
 		
 		return "redirect:/orders/listorders";
 	}
-	
-	@GetMapping("/approve")
-	public String approveOrder(@RequestParam("orderId") int theId) {
-		
+
+	@GetMapping("/deleteOrderOnCustomerRequest")
+	public String deleteOrderOnCustomerRequest(@RequestParam("orderId") int theId) {
+
 		Order tempOrder = new Order();
-		
+
 		tempOrder = orderService.findById(theId);
-		
-		//tempOrder.setOrderStatus();
-		
-		return "redirect:/customers/list";
+
+		if (tempOrder.getOrderStatus() == OrderStatus.MODIFIABLE) {
+
+			tempOrder.setOrderStatus(OrderStatus.DELETED);
+
+			orderService.save(tempOrder);
+
+			Map<Integer, Integer> unSoldProducts = new HashMap<Integer, Integer>();
+
+			List<ShoppingCartItem> tempShoppingCartItems = new ArrayList<ShoppingCartItem>();
+			tempShoppingCartItems = tempOrder.getShoppingCart().getListOfShoppingCartProducts();
+
+			for (ShoppingCartItem theShoppingCartItem : tempShoppingCartItems) {
+				unSoldProducts.put(theShoppingCartItem.getInShoppingCartProduct().getId(),
+						theShoppingCartItem.getInShoppingCartProductQuantity());
+
+			}
+
+			List<Product> productsToIncreaseQuantity = new ArrayList<Product>();
+
+			productsToIncreaseQuantity = productService.findAll();
+
+			for (Product tempProduct : productsToIncreaseQuantity) {
+
+				if (unSoldProducts.containsKey(tempProduct.getId())) {
+					tempProduct.setInStockQuantity(
+							tempProduct.getInStockQuantity() + (unSoldProducts.get(tempProduct.getId())));
+				}
+			}
+
+			for (Product tempProduct : productsToIncreaseQuantity) {
+
+				productService.save(tempProduct);
+
+			}
+		}
+
+		return "redirect:/orders/listorders";
 	}
 
 }

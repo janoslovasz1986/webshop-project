@@ -53,9 +53,15 @@
 					</td>
 					<td th:text="${tempOrder.orderStatus}" />
 					<td>
-						Valid
-					|
+						<a th:href="@{/orders/approve(orderId=${tempOrder.id})}" 
+						class="btn btn-info btn-sm">
+						Valide
+						</a>
+					|	
+						<a th:href="@{/orders/deleteOrderOnCustomerRequest(orderId=${tempOrder.id})}" 
+						class="btn btn-info btn-sm">
 						Close on CR
+						</a>
 					</td>
 					
 					 
