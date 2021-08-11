@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.johnthedev.com.mywebshop.dto.ProductDto;
+import com.johnthedev.com.mywebshop.configuration.security.UserService;
+import com.johnthedev.com.mywebshop.configuration.security.model.User;
 import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.Order;
 import com.johnthedev.com.mywebshop.entity.OrderStatus;
@@ -38,6 +41,9 @@ public class OrderController {
 
 	@Autowired
 	public ProductService productService;
+	
+	@Autowired
+	public UserService userService;
 
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
@@ -51,10 +57,16 @@ public class OrderController {
 
 	@GetMapping("/listorders")
 	public String listAllOrders(Model theModel) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		User user = userService.findUserByUserName(auth.getName());
 
 		List<Order> theOrders = orderService.findAll();
 
 		theModel.addAttribute("order", theOrders);
+		
+		theModel.addAttribute("userName", user.getUserName());
 
 		return "orders/list-orders";
 	}
