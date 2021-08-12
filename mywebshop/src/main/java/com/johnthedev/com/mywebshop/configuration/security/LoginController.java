@@ -22,23 +22,17 @@ import javax.validation.Valid;
 public class LoginController {
 	
 	@Autowired
-    private UserService userService;
+    public UserService userService;
 
 	
     @GetMapping(value={"/", "/login"})
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("login/login");
         return modelAndView;
     }
 	
 	
-	//@GetMapping(value = "/login")
-	//public String login() {
-	//	
-	//	return "login/login";
-	//}
-
     @GetMapping(value="/registration")
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();

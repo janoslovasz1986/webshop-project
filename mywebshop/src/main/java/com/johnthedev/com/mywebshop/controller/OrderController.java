@@ -66,7 +66,7 @@ public class OrderController {
 
 		theModel.addAttribute("order", theOrders);
 		
-		theModel.addAttribute("userName", user.getUserName());
+		theModel.addAttribute("userName", user.getName());
 
 		return "orders/list-orders";
 	}

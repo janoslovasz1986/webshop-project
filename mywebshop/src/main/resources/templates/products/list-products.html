@@ -16,6 +16,14 @@
 </head>
 <body>
 	<div class="container">
+		    <div class="panel-group" style="margin-top:40px">
+		        <div class="panel panel-primary">
+		            <div class="panel-heading">
+		                <span th:utext="${userName}"></span>
+		            </div>
+		        </div>
+		    </div>
+	
 		<h3>Products list</h3>
 		
 		<a th:href="@{/products/showFormForAdd}"
@@ -66,6 +74,9 @@
 		<a href="/shoppingcart/list">Back to Shoppingcart</a>
 		<br>
 		<a href="/orders/listorders">Back to Orders List</a>
+		
+		<br>
+		<a href="/login">to Login</a>
 	
 	</div>
 

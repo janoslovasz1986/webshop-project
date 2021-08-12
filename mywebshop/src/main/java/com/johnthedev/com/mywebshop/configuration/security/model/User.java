@@ -25,8 +25,8 @@ public class User {
 	@Column(name="user_name")
 	private String userName;
 
-	@Column(name="first_name")
-	private String firstName;
+	@Column(name="name")
+	private String name;
 	
 	@Column(name="last_name")
 	private String lastName;
@@ -48,21 +48,17 @@ public class User {
 		
 	}
 
-	
-
-	public User(int id, String userName, String firstName, String lastName, String email, String password,
-			boolean active, Set<Role> roles) {
+	public User(int id, String userName, String name, String lastName, String email, String password, boolean active,
+			Set<Role> roles) {
 		this.id = id;
 		this.userName = userName;
-		this.firstName = firstName;
+		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.active = active;
 		this.roles = roles;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -78,6 +74,22 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -111,39 +123,14 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", password=" + password + ", active=" + active + ", roles=" + roles + "]";
+		return "User [id=" + id + ", userName=" + userName + ", name=" + name + ", lastName=" + lastName + ", email="
+				+ email + ", password=" + password + ", active=" + active + ", roles=" + roles + "]";
 	}
 
+	
 
 
 	

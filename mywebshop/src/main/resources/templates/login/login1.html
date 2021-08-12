@@ -19,7 +19,7 @@
 	<h3>Login</h3>
 
 	<div class="container">
-		<fom name="loginForm" th:action="@{/login} method="POST">
+		<form name="loginForm" th:action="@{/login} method="POST">
 			<fieldset>
 				<legend> Webshop Page Login </legend>
 				<div th:if="{param.error}" class="alert alert-error">
@@ -36,7 +36,7 @@
 					<button type="submit" class="btn">Log in</button>
 				</div>
 			</fieldset>
-		</fom>	 
+		</form>	 
 	</div>
 </body>
 </html>
