@@ -74,15 +74,25 @@ public class OrderController {
 	@GetMapping("/save")
 	public String saveOrder() {
 
-		Customer tempCustomer = new Customer(11, "Jack", "Hopkins", "jackie@gmail.com");
-
+		//Customer tempCustomer = new Customer(11, "Jack", "Hopkins", "jackie@gmail.com");
+		Customer tempCustomer = new Customer();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUserName(auth.getName());
+		
+		tempCustomer.setEmail(user.getEmail());
+		tempCustomer.setFirstName(user.getName());
+		tempCustomer.setId(user.getId());
+		tempCustomer.setLastName(user.getLastName());
+		
+		
 		ShoppingCart tShoppingCart = new ShoppingCart();
 
 		tShoppingCart.setListOfShoppingCartProducts(theShoppingCart.getListOfShoppingCartProducts());
 
 		Order order = new Order();
 		order.setCustomer(tempCustomer);
-		order.setCustomerId(111);
+		order.setCustomerId(tempCustomer.getId());
 		order.setShoppingCart(tShoppingCart);
 		order.setOrderStatus(OrderStatus.MODIFIABLE);
 

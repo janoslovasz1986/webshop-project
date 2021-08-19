@@ -19,10 +19,19 @@
 		    <div class="panel-group" style="margin-top:40px">
 		        <div class="panel panel-primary">
 		            <div class="panel-heading">
+		            		
+				<h4> You are logged in as</h4>
+               
 		                <span th:utext="${userName}"></span>
 		            </div>
 		        </div>
 		    </div>
+		    
+		    <form th:action="@{/logout}" method="get">
+        		<button class="btn btn-md btn-danger btn-block" name="registration"
+                	type="Submit">Logout
+        		</button>
+    		</form>
 	
 		<h3>Products list</h3>
 		
