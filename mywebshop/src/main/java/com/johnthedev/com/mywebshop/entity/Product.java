@@ -54,6 +54,15 @@ public class Product {
 		this.discount = discount;
 		this.inStockQuantity = inStockQuantity;
 	}
+	
+	
+
+	public Product(String productName, double productPrice, double discount, int inStockQuantity) {
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discount = discount;
+		this.inStockQuantity = inStockQuantity;
+	}
 
 	public int getId() {
 		return id;

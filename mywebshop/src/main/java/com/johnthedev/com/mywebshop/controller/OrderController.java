@@ -74,7 +74,6 @@ public class OrderController {
 	@GetMapping("/save")
 	public String saveOrder() {
 
-		//Customer tempCustomer = new Customer(11, "Jack", "Hopkins", "jackie@gmail.com");
 		Customer tempCustomer = new Customer();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
