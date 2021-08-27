@@ -49,8 +49,9 @@ public class ProductController {
 		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
 		theModel.addAttribute("products", theProducts);
-		theModel.addAttribute("userName", user.getName());
-		
+		if (user != null) {
+			theModel.addAttribute("userName", user.getName());
+		}
 		
 		return "products/list-products";
 	}
@@ -95,4 +96,14 @@ public class ProductController {
 		
 		return "redirect:/products/list";
 	}
+	
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("theSearchName") String theSearchName,
+                                    Model theModel) {
+        
+        List<Product> foundProducts = productService.searchProducts(theSearchName);
+                
+        theModel.addAttribute("foundProducts", foundProducts);
+        return "list-products"; 
+    }
 }

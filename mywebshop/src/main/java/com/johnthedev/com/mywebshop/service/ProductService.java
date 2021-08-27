@@ -14,4 +14,6 @@ public interface ProductService{
 	
 	public void deleteById(int id);
 
+	public List<Product> searchProducts(String theSearchName);
+
 }

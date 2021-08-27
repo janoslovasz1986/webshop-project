@@ -36,11 +36,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	        String logoutPage = "/logout";
 
 	        http
-	        		//.antMatcher("/products/**")
-	        		//.antMatcher("/login/**")
 	                .authorizeRequests()
 	                .antMatchers("/").permitAll()
-	                //.antMatchers("/products/**").anonymous()
+	                .antMatchers("/products/**").permitAll()
 	                .antMatchers(loginPage).permitAll()
 	                .antMatchers("/registration").permitAll()
 	                .antMatchers("/admin/**").hasAuthority("ADMIN")
