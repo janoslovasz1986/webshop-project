@@ -98,12 +98,11 @@ public class ProductController {
 	}
 	
     @GetMapping("/search")
-    public String searchProducts(@RequestParam("theSearchName") String theSearchName,
+    public String searchProducts(@RequestParam(name = "theSearchName" , required = false) String theSearchName,
                                     Model theModel) {
-        
-        List<Product> foundProducts = productService.searchProducts(theSearchName);
+        List<Product> theProducts = productService.searchProducts(theSearchName);
                 
-        theModel.addAttribute("foundProducts", foundProducts);
-        return "list-products"; 
+        theModel.addAttribute("products", theProducts);
+        return "products/list-products"; 
     }
 }
