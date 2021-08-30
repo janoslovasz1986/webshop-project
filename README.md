@@ -27,11 +27,5 @@ Simple webshop pet project
 
 ---
 
-<details>
-  <summary>:zap: GitHub Stats</summary>
-
-  <img align="left" alt="codeSTACKr's GitHub Stats" src="https://github-readme-stats.janoslovasz1986.vercel.app/api?username=janoslovasz1986&show_icons=true&hide_border=true" />
-
-</details>
 
 [linkedin]: https://linkedin.com/in/janos-lovasz-java/
