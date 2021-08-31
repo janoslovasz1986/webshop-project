@@ -50,7 +50,10 @@ public class ProductController {
 		
 		theModel.addAttribute("products", theProducts);
 		if (user != null) {
-			theModel.addAttribute("userName", user.getName());
+			//theModel.addAttribute("userName", user.getName()); 
+			theModel.addAttribute("user", user); 
+			theModel.addAttribute("userRoles", user.getRoles().toString()); 
+
 		}
 		
 		return "products/list-products";
@@ -104,5 +107,11 @@ public class ProductController {
                 
         theModel.addAttribute("products", theProducts);
         return "products/list-products"; 
+    }
+    
+    @GetMapping("/test")
+    public String testProducts( Model theModel) {
+
+        return "products/test"; 
     }
 }

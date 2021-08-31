@@ -10,7 +10,7 @@ import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 public class ShoppingCartItemBeanConfig {
 	
 	@Bean
-	@SessionScope
+	//@SessionScope
 	public ShoppingCartItem shoppingCartItem() {
 		
 		return new ShoppingCartItem();

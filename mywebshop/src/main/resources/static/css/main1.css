@@ -1,0 +1,323 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #eceef1;
+	font-family: 'Slabo 27px', serif;
+	color: #333a45;
+}
+
+.wrapper {
+	margin: 5em auto;
+	max-width: 1000px;
+	background-color: #dff;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.06);
+}
+
+.header {
+	padding: 30px 30px 0;
+	text-align: center;
+}
+
+.header__title {
+	margin: 0;
+	text-transform: uppercase;
+	font-size: 2.5em;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+.header__subtitle {
+	margin: 0;
+	font-size: 1.5em;
+	color: #949fb0;
+	font-family: 'Yesteryear', cursive;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+.cards {
+	padding: 15px;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.card {
+	margin: 15px;
+	width: calc(( 100%/ 3)- 30px);
+	transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 991px) {
+	.card {
+		width: calc(( 100%/ 2)- 30px);
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.card {
+		width: 100%;
+	}
+}
+
+.card:hover .card__inner {
+	background-color: #1abc9c;
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+.card__inner {
+	width: 100%;
+	padding: 30px;
+	position: relative;
+	cursor: pointer;
+	background-color: #949fb0;
+	color: #eceef1;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	text-align: center;
+	transition: all 0.2s ease-in-out;
+}
+
+.card__inner:after {
+	transition: all 0.3s ease-in-out;
+}
+
+.card__inner .fa {
+	width: 100%;
+	margin-top: .25em;
+}
+
+.card.is-expanded:hover .card__inner {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.card.is-inactive .card__inner {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.card.is-inactive:hover .card__inner {
+	background-color: #949fb0;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+@media screen and (min-width: 992px) {
+	.card:nth-of-type(3n+2) .card__expander {
+		margin-left: calc(-100% - 30px);
+	}
+	.card:nth-of-type(3n+3) .card__expander {
+		margin-left: calc(-200% - 60px);
+	}
+	.card:nth-of-type(3n+4) {
+		clear: left;
+	}
+	.card__expander {
+		width: calc(300% + 60px);
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.card:nth-of-type(2n+2) .card__expander {
+		margin-left: calc(-100% - 30px);
+	}
+	.card:nth-of-type(2n+3) {
+		clear: left;
+	}
+	.card__expander {
+		width: calc(200% + 30px);
+	}
+}
+
+body, html {
+	height: 100%
+}
+
+.top-w3-top {
+	font-family: "Amatic SC", sans-serif;
+}
+
+.footer-w3-container {
+	margin-bottom: 0;
+}
+
+.elveszett {
+	background-color: #F5F5DC;
+	font-family: "Arial", sans-serif;
+	font-size: 1rem;
+}
+
+.jumbotron-fluid {
+	background-color: #F5F5DC;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	color: black;
+	margin-top: 50px;
+}
+
+.jumbotron-fluid display-4 {
+	font-family: "Amatic SC", sans-serif;
+	font-size: 3rem;
+	text-align: center;
+}
+
+.title {
+	color: grey;
+	font-size: 15px;
+}
+
+button {
+	border: none;
+	outline: 0;
+	display: inline-block;
+	padding: 8px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+}
+
+a {
+	text-decoration: none;
+	font-size: 22px;
+	color: black;
+}
+
+button:hover, a:hover {
+	opacity: 0.7;
+}
+
+.btn-outline-info {
+	border: 2px solid;
+}
+
+.table-lost {
+	background-color: #fff;
+	padding: 10px;
+	border: 1px solid darken;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	max-width: calc(100% - 2em);
+	margin: 1em auto;
+	overflow: hidden;
+	width: 800px;
+	border: none;
+	box-shadow: none;
+	overflow: visible;
+}
+
+            table {
+                width: 100%;
+
+                td, th {
+                    color: rgba(217, 136, 89, 1);
+                }
+
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+
+                    &:last-child {
+                        font-size: 0.95em;
+                        line-height: 1.4;
+                        text-align: left;
+                    }
+                }
+
+                th {
+                    background-color: lighten;
+                    font-weight: 300;
+                }
+
+                tr {
+                    &:nth-child(2n) { background-color: white; }
+                    &:nth-child(2n+1) { background-color: lighten }
+                }
+            }
+
+td {
+	text-align: center;
+	vertical-align: middle; &: last-child { font-size : 0.95em;
+	line-height: 1.4;
+	text-align: left;
+}
+
+}
+th {
+	background-color: lighten;
+	font-weight: 300;
+}
+
+tr { &:nth-child (2n) { background-color:white;
+	
+}
+
+&
+:nth-child(2n+1) {
+	background-color: lighten
+}
+
+}
+}
+@media screen and (max-width: 700px) {
+	table, tr, td {
+		display: block;
+	}
+	td { &:first-child { position:absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	&
+	:not(:first-child) {
+		clear: both;
+		padding: 4px 20px 4px 90px;
+		position: relative;
+		text-align: left; &: before { color : lighten;
+		display: block;
+		left: 0;
+		position: absolute;
+	}
+}
+
+&
+:nth-child(2):before {
+	content: 'Kép:';
+}
+
+&
+:nth-child(3):before {
+	content: 'Neve:';
+}
+
+&
+:nth-child(4):before {
+	content: 'Neme:';
+}
+
+&
+:nth-child(4):before {
+	content: 'Város:';
+}
+
+&
+:nth-child(5):before {
+	content: 'Elveszett:';
+}
+
+}
+tr {
+	position: relative;
+	&:
+	first-child
+	{
+	display
+	:
+	none;
+}
+}
+}
