@@ -50,9 +50,9 @@ public class ProductController {
 		
 		theModel.addAttribute("products", theProducts);
 		if (user != null) {
-			//theModel.addAttribute("userName", user.getName()); 
 			theModel.addAttribute("user", user); 
-			theModel.addAttribute("userRoles", user.getRoles().toString()); 
+			user.setHasAdminRole(user.isHasAdminRole());
+			System.out.println(user.isHasAdminRole());
 
 		}
 		

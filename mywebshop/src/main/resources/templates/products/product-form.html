@@ -6,6 +6,11 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Slabo+27px|Yesteryear'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
 	
 	<!-- Bootstrap CSS -->
 	<link
@@ -13,6 +18,58 @@
 		rel="stylesheet"
 		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 		crossorigin="anonymous">
+		
+		
+		
+       <script>
+
+            function openRapid(evt, rapidName) {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("rapid");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+                }
+                document.getElementById(rapidName).style.display = "block";
+                evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+            }
+            document.getElementById("myLink").click();
+
+
+            $(function () {
+
+                $("#myUploadDialog").dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+
+                $("#myUploadLink").on("click", function (e) {
+                    e.preventDefault();
+                    $("#myUploadDialog").dialog("open");
+                });
+
+            });
+            
+            $(document).ready(function () {
+                $('img').on('click', function () {
+                    var image = $(this).attr('src');
+                    //alert(image);
+                    $('#myModal').on('show.bs.modal', function () {
+                        $(".showimage").attr("src", image);
+                    });
+                });
+            });
+            
+            
+            function alertUpload() {
+                alert("Sikeres Feltöltés!");
+            }
+            
+            
+       </script>
 </head>
 <body>
 
@@ -40,7 +97,21 @@
 					
 			<input type="text" th:field="*{inStockQuantity}"
 					class="form-control mb-4 col-4" placeholder="Stocked quantity">
-
+					
+			<input type="text" th:field="*{imagePath}"
+					class="form-control mb-4 col-4" placeholder="Image path">
+					
+	        <!--  <button type="button" class="btn" data-toggle="modal" data-target="#myModal" data-remote="/uploadFile">Fénykép feltöltése</button>                         
+                          <label for="image">
+                              <input type="text" id="image" name="image" class="textfield" value="<%= request.getAttribute("imagePath")%>">
+                          </label>
+ 			-->
+ 			
+ 			   <a href="/uploadfile" id="myUploadPath">Fénykép feltöltése</a><br>
+                            <label for="image">
+                                <input  id="image" name="image" class="textfield" type="text" value="<%= request.getAttribute("imageLink")%>">
+                            </label>
+ 			<br>
 			<button type="submit" class="btn btn-info col-2">Save</button>			
 		
 		</form>
@@ -48,5 +119,23 @@
 		<a href="/products/list">Back to Product List</a>
 	
 	</div>
+	
+	        <div id="myModal" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> × </button>
+                <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">        
+                <div id="myUploadDialog" title="FileUpload">
+                    <form th:action="@{/uploadfile}" enctype="multipart/form-data" method="get" onsubmit="alertUpload()">
+                        <input type="file" name="file2" /><br>
+                        <input type="submit" value="upload" />
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+        </div>
 </body>
 </html>

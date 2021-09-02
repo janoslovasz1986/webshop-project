@@ -3,6 +3,7 @@ package com.johnthedev.com.mywebshop.service;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import org.hibernate.engine.transaction.jta.platform.internal.TransactionManagerBasedSynchronizationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -44,7 +45,9 @@ public class FileUploadController {
 								.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
 								.build().toUri().toString())
 						.collect(Collectors.toList()));
-
+		
+		System.out.println("elérési ut: " + storageService.getFilePath());
+		
 		return "uploadForm";
 	}
 

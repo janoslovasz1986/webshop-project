@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileSystemStorageService implements StorageService {
 
 	private final Path rootLocation;
+	private String imageFilePath;
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
@@ -36,6 +37,11 @@ public class FileSystemStorageService implements StorageService {
 			Path destinationFile = this.rootLocation.resolve(
 					Paths.get(file.getOriginalFilename()))
 					.normalize().toAbsolutePath();
+			
+			imageFilePath = new String();
+			imageFilePath = destinationFile.toString();
+			System.out.println("--------------"+imageFilePath+"--------------");
+			
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
 				throw new StorageException(
@@ -90,7 +96,7 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public void deleteAll() {
-		FileSystemUtils.deleteRecursively(rootLocation.toFile());
+		//FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
 
 	@Override
@@ -102,4 +108,14 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Could not initialize storage", e);
 		}
 	}
+
+	@Override
+	public String getFilePath() {
+		
+		System.out.println("++++++" + rootLocation.toFile() +"++++++");
+		
+		return "/"+rootLocation.toString()+"/";
+	}
+	
+	
 }

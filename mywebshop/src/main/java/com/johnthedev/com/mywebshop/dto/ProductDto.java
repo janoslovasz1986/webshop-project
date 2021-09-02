@@ -18,6 +18,11 @@ public class ProductDto {
 	@Column(name="in_stock_quantity")
 	private int inStockQuantity;
 	
+	@Column(name="image_path")
+	private String imagePath;
+	
+	
+	
 	public ProductDto() {
 	}
 
@@ -40,6 +45,18 @@ public class ProductDto {
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.discount = discount;
+	}
+	
+	
+
+	public ProductDto(int id, String productName, double productPrice, double discount, int inStockQuantity,
+			String imagePath) {
+		this.id = id;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discount = discount;
+		this.inStockQuantity = inStockQuantity;
+		this.imagePath = imagePath;
 	}
 
 	public int getId() {
@@ -82,6 +99,16 @@ public class ProductDto {
 
 	public void setInStockQuantity(int inStockQuantity) {
 		this.inStockQuantity = inStockQuantity;
+	}
+	
+	
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	@Override
