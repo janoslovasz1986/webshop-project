@@ -90,27 +90,25 @@
 					class="form-control mb-4 col-4" placeholder="Product Name">
 		
 			<input type="text" th:field="*{productPrice}"
-					class="form-control mb-4 col-4" placeholder="Product Price">
+				class="form-control mb-4 col-4" placeholder="Product Price">
 		
 			<input type="text" th:field="*{discount}"
 					class="form-control mb-4 col-4" placeholder="Discount">
 					
 			<input type="text" th:field="*{inStockQuantity}"
 					class="form-control mb-4 col-4" placeholder="Stocked quantity">
-					
-			<input type="text" th:field="*{imagePath}"
-					class="form-control mb-4 col-4" placeholder="Image path">
-					
-	        <!--  <button type="button" class="btn" data-toggle="modal" data-target="#myModal" data-remote="/uploadFile">Fénykép feltöltése</button>                         
-                          <label for="image">
-                              <input type="text" id="image" name="image" class="textfield" value="<%= request.getAttribute("imagePath")%>">
-                          </label>
- 			-->
- 			
+			
+			<input type="hidden" th:field="*{imgPath}"
+				class="form-control mb-4 col-4" placeholder="pazth">
+
  			   <a href="/uploadfile" id="myUploadPath">Fénykép feltöltése</a><br>
-                            <label for="image">
-                                <input  id="image" name="image" class="textfield" type="text" value="<%= request.getAttribute("imageLink")%>">
-                            </label>
+           		<div>
+					<h4>AAAA</h4>
+					<span th:if="${imgPath != null}" th:text="${imgPath}"></span>
+				</div>
+				<div th:if="${message}">
+					<h2 th:text="${message}"/>
+				</div>
  			<br>
 			<button type="submit" class="btn btn-info col-2">Save</button>			
 		

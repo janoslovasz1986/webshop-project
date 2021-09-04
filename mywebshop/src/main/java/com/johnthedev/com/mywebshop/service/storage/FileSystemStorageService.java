@@ -37,10 +37,7 @@ public class FileSystemStorageService implements StorageService {
 			Path destinationFile = this.rootLocation.resolve(
 					Paths.get(file.getOriginalFilename()))
 					.normalize().toAbsolutePath();
-			
-			imageFilePath = new String();
-			imageFilePath = destinationFile.toString();
-			System.out.println("--------------"+imageFilePath+"--------------");
+
 			
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
@@ -111,8 +108,6 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public String getFilePath() {
-		
-		System.out.println("++++++" + rootLocation.toFile() +"++++++");
 		
 		return "/"+rootLocation.toString()+"/";
 	}

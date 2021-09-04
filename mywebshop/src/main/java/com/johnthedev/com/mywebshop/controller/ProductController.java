@@ -3,8 +3,6 @@ package com.johnthedev.com.mywebshop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.configuration.security.UserService;
-import com.johnthedev.com.mywebshop.configuration.security.model.User;
 import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
@@ -42,19 +39,19 @@ public class ProductController {
 	@GetMapping("/list")
 	public String listProducts(Model theModel) {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		User user = userService.findUserByUserName(auth.getName());
+		//User user = userService.findUserByUserName(auth.getName());
 		
 		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
 		theModel.addAttribute("products", theProducts);
-		if (user != null) {
-			theModel.addAttribute("user", user); 
-			user.setHasAdminRole(user.isHasAdminRole());
-			System.out.println(user.isHasAdminRole());
-
-		}
+//		if (user != null) {
+//			theModel.addAttribute("user", user); 
+//			user.setHasAdminRole(user.isHasAdminRole());
+//			System.out.println(user.isHasAdminRole());
+//
+//		}
 		
 		return "products/list-products";
 	}
@@ -63,21 +60,31 @@ public class ProductController {
 	public String showFormForAdd(Model theModel) {
 		
 		Product theProduct = new Product();
+		String s = new String();
 		
+		if (theModel.getAttribute("imgPath") != null) {
+		
+			s = theModel.getAttribute("imgPath").toString();
+
+			theProduct.setImgPath(s);
+			theModel.addAttribute("imgPath", s);
+		}
+		theModel.addAttribute("imgPath", s);
 		theModel.addAttribute("product", theProduct);
-		
+//		redirectAttributes.addFlashAttribute("imgPath", s);
 		return "products/product-form";
 	}
 	
 	@PostMapping("/save")
-	public String saveProduct(@ModelAttribute("product") ProductDto theProduct) {
+	public String saveProduct(@ModelAttribute("product") ProductDto theProduct,Model theModel, 
+								@ModelAttribute("imgPath") String imgPath) {
 		
 		Product product = new Product();
 		
 		product = productDtoMapper.producDtoToProductEntityMapper(theProduct);
+		product.setImgPath(theModel.getAttribute("imgPath").toString());
 		
 		productService.save(product);
-		
 		
 		return "redirect:/products/list";
 	}

@@ -26,7 +26,7 @@ public class ProductDtoMapper {
 		theProductDto.setProductPrice(theProduct.getProductPrice());
 		theProductDto.setDiscount(theProduct.getDiscount());
 		theProductDto.setInStockQuantity(theProduct.getInStockQuantity());
-		theProductDto.setImagePath(theProduct.getImagePath());
+		theProductDto.setImgPath(theProduct.getImgPath());
 
 		return theProductDto;
 	}
@@ -48,7 +48,7 @@ public class ProductDtoMapper {
 		theProduct.setProductPrice(theProductDto.getProductPrice());
 		theProduct.setDiscount(theProductDto.getDiscount());
 		theProduct.setInStockQuantity(theProductDto.getInStockQuantity());
-		theProduct.setImagePath(theProductDto.getImagePath());
+		theProduct.setImgPath(theProductDto.getImgPath());
 
 		return theProduct;
 	}

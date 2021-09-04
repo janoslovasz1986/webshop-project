@@ -19,7 +19,7 @@ public class ProductDto {
 	private int inStockQuantity;
 	
 	@Column(name="image_path")
-	private String imagePath;
+	private String imgPath;
 	
 	
 	
@@ -32,31 +32,15 @@ public class ProductDto {
 		this.productPrice = productPrice;
 		this.discount = discount;
 	}
-	
-	public ProductDto(int id, String productName, double productPrice, double discount, int inStockQuantity) {
-		this.id = id;
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.discount = discount;
-		this.inStockQuantity = inStockQuantity;
-	}
-
-	public ProductDto(String productName, double productPrice, double discount) {
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.discount = discount;
-	}
-	
-	
 
 	public ProductDto(int id, String productName, double productPrice, double discount, int inStockQuantity,
-			String imagePath) {
+			String imgPath) {
 		this.id = id;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.discount = discount;
 		this.inStockQuantity = inStockQuantity;
-		this.imagePath = imagePath;
+		this.imgPath = imgPath;
 	}
 
 	public int getId() {
@@ -103,12 +87,12 @@ public class ProductDto {
 	
 	
 
-	public String getImagePath() {
-		return imagePath;
+	public String getImgPath() {
+		return imgPath;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	@Override
@@ -151,14 +135,7 @@ public class ProductDto {
 	@Override
 	public String toString() {
 		return "ProductDto [id=" + id + ", productName=" + productName + ", productPrice=" + productPrice
-				+ ", discount=" + discount + "]";
+				+ ", discount=" + discount + ", inStockQuantity=" + inStockQuantity + ", imgPath=" + imgPath + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

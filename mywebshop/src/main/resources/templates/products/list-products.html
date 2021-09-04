@@ -174,6 +174,7 @@
 <body>
 
 	<div class="container">
+	<!-- 
 		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -182,7 +183,7 @@
 					<span th:if="${user != null}" th:text="${user.getName}"></span>
 				</div>
 			</div>
-
+ -->
 		</div>
 
 		<form th:action="@{/logout}" method="get">
@@ -204,60 +205,64 @@
 
 
 		
-</div>
+	</div>
 	
+	<div class="wrapper">
+		<div class="cards">
+			<tr th:each="tempProduct : ${products}">
 	
-		
-				<div class="wrapper">
-					<div class="cards">
-						<tr th:each="tempProduct : ${products}">
-				
-						<td>
-							<div class=" card [ is-collapsed ] ">
-								<div class="card__inner [ js-expander ]" style="width: 15rem;  text-align: center; display: inline-block;">
-									
-								<!-- 	<img class="card-img-top"  th:src="@{/img/Profile.JPG}" alt="Card image cap" th:height="150" th:width="150"
-									data-toggle="modal" data-target="#myModal"
-									style="border-radius: .60rem; object-fit: cover"/>		  -->									
-										  
-									<img class="card-img-top"  th:src="@{/img/Profile.JPG}" alt="Card image cap" th:height="150" th:width="150"
-									data-toggle="modal" data-target="#myModal"
-									style="border-radius: .60rem; object-fit: cover"/>	 
-										 
-										  <div class="card-block">
-			                                    <span th:text="${tempProduct.productName}">Name</span>
-			                                    <br>
-			                                    <br>
-			                                     <span th:text="${tempProduct.productPrice} + ' Ft'"/>
-			                                     <br>
-			                                     <br>
-			                                    <span th:text="|In stock: ${tempProduct.inStockQuantity}|"/>
-			                                    
+			<td>
+				<div class=" card [ is-collapsed ] ">
+					<div class="card__inner [ js-expander ]" style="width: 15rem;  text-align: center; display: inline-block;">									
+							  
+						<img class="card-img-top"  th:src="@{/img/Profile.JPG}" alt="Card image cap" th:height="150" th:width="150"
+						data-toggle="modal" data-target="#myModal"
+						style="border-radius: .60rem; object-fit: cover"/>	 
+						
+					<!-- 	<img class="card-img-top"  th:src="@{/img/Profile.JPG}" alt="Card image cap" th:height="150" th:width="150"
+						data-toggle="modal" data-target="#myModal"
+						style="border-radius: .60rem; object-fit: cover"/>	
+					 -->		 
+							  <div class="card-block">
+                                    <span th:text="${tempProduct.productName}">Name</span>
+                                    <br>
+                                    <br>
+                                     <span th:text="${tempProduct.productPrice} + ' Ft'"/>
+                                     <br>
+                                     <br>
+                                    <span th:text="|In stock: ${tempProduct.inStockQuantity}|"/>
+                                    
 
-			                              </div>
-			                         </div>
-                    			
-                    			
-                    			<span  th:if="${user == null}">
-	                    			<a th:href="@{/shoppingcart/addProductToShoppingCart(productId=${tempProduct.id})}"
-									class="btn btn-info btn-sm"> Add to ShoppingCart </a> 
-								</span> 
-								<span  th:if="${user != null and user.hasAdminRole == true}">
-									  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
-										class="btn btn-info btn-sm"> Update </a>
-								</span> 
-								<span  th:if="${user != null and user.hasAdminRole == true}">
-									  <a th:href="@{/products/delete(productId=${tempProduct.id})}"
-											class="btn btn-info btn-sm"
-											onclick="if (!(confirm('Are you sure want to delete this product?'))) return false">
-												Delete </a>
-								</span> 
-
-			                </div>
-                           </td>         
-						</tr>
-					</div>
-				</div>
+                              </div>
+                         </div>
+                 			
+                 			
+                 			<span  th:if="${user == null}">
+                  			<a th:href="@{/shoppingcart/addProductToShoppingCart(productId=${tempProduct.id})}"
+						class="btn btn-info btn-sm"> Add to ShoppingCart </a> 
+					</span> 
+					<!-- <span  th:if="${user != null and user.hasAdminRole == true}">
+						  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
+							class="btn btn-info btn-sm"> Update </a>
+					</span>  -->
+					
+					<span >
+						  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
+							class="btn btn-info btn-sm"> Update </a>
+					</span> 
+					<!-- 
+					<span  th:if="${user != null and user.hasAdminRole == true}">
+						  <a th:href="@{/products/delete(productId=${tempProduct.id})}"
+								class="btn btn-info btn-sm"
+								onclick="if (!(confirm('Are you sure want to delete this product?'))) return false">
+									Delete </a>
+					</span> 
+					 -->
+                </div>
+                        </td>         
+			</tr>
+		</div>
+	</div>
 		
 	
 	<div>
