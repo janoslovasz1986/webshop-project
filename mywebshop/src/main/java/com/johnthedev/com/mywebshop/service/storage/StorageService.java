@@ -21,5 +21,7 @@ public interface StorageService {
 	void deleteAll();
 	
 	String getFilePath();
+	
+	String getImageLocation();
 
 }

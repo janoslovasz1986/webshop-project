@@ -25,7 +25,7 @@ public class ProductTests {
 	@Rollback(true)
 	public void TestCreateProduct() {
 		
-		Product product = new Product(1, "Floppy", 1500, 0, 15);
+		Product product = new Product(1, "Floppy", 1500, 0, 15,"");
 		Product savedProduct = repo.save(product);
 		
 		assertNotNull(savedProduct);

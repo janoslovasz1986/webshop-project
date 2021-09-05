@@ -98,7 +98,7 @@
 			<input type="text" th:field="*{inStockQuantity}"
 					class="form-control mb-4 col-4" placeholder="Stocked quantity">
 			
-			<input type="hidden" th:field="*{imgPath}"
+			<input type="text" th:field="*{imgPath}"
 				class="form-control mb-4 col-4" placeholder="pazth">
 
  			   <a href="/uploadfile" id="myUploadPath">Fénykép feltöltése</a><br>
@@ -113,6 +113,9 @@
 			<button type="submit" class="btn btn-info col-2">Save</button>			
 		
 		</form>
+		<div>
+			<img src="${path}" th:src="${path}" alt="some picture"/>
+		</div>
 		
 		<a href="/products/list">Back to Product List</a>
 	

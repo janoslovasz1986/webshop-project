@@ -13,21 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
 
 	private final Path rootLocation;
-	private String imageFilePath;
+	private String imageLocation;
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
 
+
+	
 	@Override
 	public void store(MultipartFile file) {
 		try {
@@ -38,6 +38,8 @@ public class FileSystemStorageService implements StorageService {
 					Paths.get(file.getOriginalFilename()))
 					.normalize().toAbsolutePath();
 
+			imageLocation = destinationFile.toString();
+			System.out.println("***Path: " + imageLocation + "*****");
 			
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
@@ -93,7 +95,7 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public void deleteAll() {
-		//FileSystemUtils.deleteRecursively(rootLocation.toFile());
+//		FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
 
 	@Override
@@ -105,11 +107,19 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Could not initialize storage", e);
 		}
 	}
-
+	
 	@Override
 	public String getFilePath() {
 		
 		return "/"+rootLocation.toString()+"/";
+	}
+	
+	@Override
+	public String getImageLocation() {
+		
+		System.out.println("image location" + imageLocation);
+		
+		return imageLocation;
 	}
 	
 	
