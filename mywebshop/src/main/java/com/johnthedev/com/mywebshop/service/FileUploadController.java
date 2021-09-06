@@ -59,15 +59,12 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes, Model theModel) {
 
 		storageService.store(file);
-		System.out.println("model in post/: "+ theModel);
-		
+
 		String s = new String();		
-		s = storageService.getFilePath()+file.getOriginalFilename();
-		System.out.println("Before trim s " + s);
-		
+		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
 		String s1 = new String();
 		s1 = s.substring(27);
-		System.out.println("troimmed s1: " + s1);
+		
 		redirectAttributes.addFlashAttribute("imgPath",s1);
 		
 	

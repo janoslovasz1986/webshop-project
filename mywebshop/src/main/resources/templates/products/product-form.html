@@ -98,14 +98,14 @@
 			<input type="text" th:field="*{inStockQuantity}"
 					class="form-control mb-4 col-4" placeholder="Stocked quantity">
 			
-			<input type="text" th:field="*{imgPath}"
+			<input type="hidden" th:field="*{imgPath}"
 				class="form-control mb-4 col-4" placeholder="pazth">
 
  			   <a href="/uploadfile" id="myUploadPath">Fénykép feltöltése</a><br>
-           		<div>
-					<h4>AAAA</h4>
+           	<!-- 	<div>
 					<span th:if="${imgPath != null}" th:text="${imgPath}"></span>
 				</div>
+			 -->
 				<div th:if="${message}">
 					<h2 th:text="${message}"/>
 				</div>
@@ -113,9 +113,6 @@
 			<button type="submit" class="btn btn-info col-2">Save</button>			
 		
 		</form>
-		<div>
-			<img src="${path}" th:src="${path}" alt="some picture"/>
-		</div>
 		
 		<a href="/products/list">Back to Product List</a>
 	
