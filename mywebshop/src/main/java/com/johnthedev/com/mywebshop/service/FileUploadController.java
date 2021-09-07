@@ -32,8 +32,21 @@ public class FileUploadController {
 		this.storageService = storageService;
 	}
 
-	@GetMapping("/uploadfile")
+	@GetMapping("/uploadfile/add")
 	public String listUploadedFiles(Model model) throws IOException {
+		
+		System.out.println("Model in list get start:" + model);
+
+		model.addAttribute("files", storageService.loadAll().map(
+				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+						"serveFile", path.getFileName().toString()).build().toUri().toString())
+				.collect(Collectors.toList()));
+
+		return "uploadForm-add";
+	}
+	
+	@GetMapping("/uploadfile/update")
+	public String updateUploadedImage                                         (Model model) throws IOException {
 		
 		System.out.println("Model in list get start:" + model);
 
@@ -54,12 +67,12 @@ public class FileUploadController {
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
 
-	@PostMapping("/")
+	@PostMapping("/addImage")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes, Model theModel) {
 
 		storageService.store(file);
-
+		System.out.println("**** the model: " + theModel);
 		String s = new String();		
 		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
 		String s1 = new String();
@@ -70,8 +83,29 @@ public class FileUploadController {
 	
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
-		System.out.println("model in file iupload end: "+ theModel);
-	return "redirect:/products/showFormForAdd";
+		return "redirect:/products/showFormForAdd";
+	}
+		
+	@PostMapping("/updateImage")
+	public String handleImageUpdate(@RequestParam("file") MultipartFile file,
+			RedirectAttributes redirectAttributes, Model theModel) {
+
+		storageService.store(file);
+		System.out.println("**** the in update start model: " + theModel);
+		String s = new String();		
+		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
+		String s1 = new String();
+		s1 = s.substring(27);
+		
+		redirectAttributes.addFlashAttribute("imgPath",s1);
+		
+	
+		redirectAttributes.addFlashAttribute("message",
+				"You successfully uploaded " + file.getOriginalFilename() + "!");
+	System.out.println("model in file iupload end: "+ theModel);
+	redirectAttributes.addFlashAttribute("productId",1);
+	return "redirect:/products/showFormForUpdate?productId=1";
+//	return "forward:/products/showFormForUpdate";
 
 	}
 

@@ -83,7 +83,7 @@
 			th:object="${product}"  method="POST">
 			
 									
-			<!-- Add hidden form fiel to handle update -->
+			<!-- Add hidden form field to handle update -->
 			<input type="hidden" th:field="*{id}"/>
 		
 			<input type="text" th:field="*{productName}"
@@ -98,14 +98,20 @@
 			<input type="text" th:field="*{inStockQuantity}"
 					class="form-control mb-4 col-4" placeholder="Stocked quantity">
 			
-			<input type="hidden" th:field="*{imgPath}"
-				class="form-control mb-4 col-4" placeholder="pazth">
+			<input type="text" th:field="*{imgPath}"
+				class="form-control mb-4 col-4" placeholder="path">
+				
+			 	<div>
+					<span th:if="${imagePath != null}" th:text="${imagePath}"></span>
 
- 			   <a href="/uploadfile" id="myUploadPath">Fénykép feltöltése</a><br>
-           	<!-- 	<div>
-					<span th:if="${imgPath != null}" th:text="${imgPath}"></span>
+					<!-- <span th:if="${imagePath != null}" th:field="*{imgPath}"="${imagePath}"></span>  -->
 				</div>
-			 -->
+
+ 			   <a th:if="*{id}==0" href="/uploadfile/add" id="myUploadPath">Fénykép feltöltése</a><br>
+ 			   
+ 			   <a th:if="*{id}!=0" href="/uploadfile/update" id="myUploadPath">Fénykép feltöltése</a><br>
+ 
+			 
 				<div th:if="${message}">
 					<h2 th:text="${message}"/>
 				</div>
@@ -113,6 +119,8 @@
 			<button type="submit" class="btn btn-info col-2">Save</button>			
 		
 		</form>
+		
+        
 		
 		<a href="/products/list">Back to Product List</a>
 	

@@ -80,9 +80,18 @@ public class ProductController {
 								@ModelAttribute("imgPath") String imgPath) {
 		
 		Product product = new Product();
+		System.out.println("Model before save psots:  " + theModel);
 		
 		product = productDtoMapper.producDtoToProductEntityMapper(theProduct);
 		product.setImgPath(theModel.getAttribute("imgPath").toString());
+		System.out.println("Model after update save psots:  " + theModel);
+		
+//		if (imagePath != null) {
+//			product.setImgPath(theModel.getAttribute("imagePath").toString());
+//			System.out.println("*****************************-");
+//			System.out.println("*** the path is: "+ theModel.getAttribute("imagePath").toString());
+//			System.out.println("*** the path is: "+ theModel.getAttribute("imgPath").toString());
+//		}
 		
 		productService.save(product);
 		
@@ -92,10 +101,19 @@ public class ProductController {
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("productId") int theId, Model theModel) {
 		
+		System.out.println("model in update : " + theModel);
 		ProductDto theProduct = productDtoMapper.productEntityToProductDtoMapper(productService.findById(theId));
 		
-		theModel.addAttribute("product",theProduct);
+//		theModel.addAttribute("product",theProduct);
 		
+		if (theModel.containsAttribute("imgPath")) {
+			System.out.println("YUP--------: " + theModel.getAttribute("imgPath"));
+			theModel.addAttribute("imagePath",theModel.getAttribute("imgPath"));
+			theProduct.setImgPath(theModel.getAttribute("imgPath").toString());
+		}
+		
+		theModel.addAttribute("product",theProduct);
+		System.out.println("model in update end : " + theModel);
 		return "products/product-form";
 	}
 	
