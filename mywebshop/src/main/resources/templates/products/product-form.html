@@ -84,7 +84,7 @@
 			
 									
 			<!-- Add hidden form field to handle update -->
-			<input type="hidden" th:field="*{id}"/>
+			<input type="text" th:field="*{id}"/>
 		
 			<input type="text" th:field="*{productName}"
 					class="form-control mb-4 col-4" placeholder="Product Name">
@@ -108,10 +108,15 @@
 				</div>
 
  			   <a th:if="*{id}==0" href="/uploadfile/add" id="myUploadPath">Fénykép feltöltése</a><br>
- 			   
- 			   <a th:if="*{id}!=0" href="/uploadfile/update" id="myUploadPath">Fénykép feltöltése</a><br>
- 
-			 
+ 	 
+ 			   <span>
+ 			  	 <a th:href="@{/uploadfile/update(productId=*{id})}" >Fénykép feltöltése</a><br>
+ 				
+			 </span> 
+			 	<span >
+						  <a th:href="@{/products/showFormForUpdate}"
+							class="btn btn-info btn-sm"> Update </a>
+				</span>
 				<div th:if="${message}">
 					<h2 th:text="${message}"/>
 				</div>

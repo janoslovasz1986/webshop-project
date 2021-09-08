@@ -46,16 +46,21 @@ public class FileUploadController {
 	}
 	
 	@GetMapping("/uploadfile/update")
-	public String updateUploadedImage                                         (Model model) throws IOException {
+	public String updateUploadedImage(@RequestParam("productId") int theId, Model model,
+			RedirectAttributes redirectAttributes) throws IOException {
 		
 		System.out.println("Model in list get start:" + model);
+	System.out.println("Product_id: " + theId);
 
 		model.addAttribute("files", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 						"serveFile", path.getFileName().toString()).build().toUri().toString())
 				.collect(Collectors.toList()));
+//		redirectAttributes.addAttribute("theId",theId);
 
+		model.addAttribute("theId",theId);
 		return "uploadForm";
+//		return "redirect:/products/showFormForUpdate?productId="+theId+"";
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -92,6 +97,7 @@ public class FileUploadController {
 
 		storageService.store(file);
 		System.out.println("**** the in update start model: " + theModel);
+		System.out.println("get flash attroutes: " + redirectAttributes.getFlashAttributes());
 		String s = new String();		
 		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
 		String s1 = new String();
@@ -105,7 +111,7 @@ public class FileUploadController {
 	System.out.println("model in file iupload end: "+ theModel);
 	redirectAttributes.addFlashAttribute("productId",1);
 	return "redirect:/products/showFormForUpdate?productId=1";
-//	return "forward:/products/showFormForUpdate";
+//	return "uploadForm";
 
 	}
 
