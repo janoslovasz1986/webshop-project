@@ -26,6 +26,7 @@ import com.johnthedev.com.mywebshop.service.storage.StorageService;
 public class FileUploadController {
 
 	private final StorageService storageService;
+	private int theProductId;
 
 	@Autowired
 	public FileUploadController(StorageService storageService) {
@@ -34,8 +35,6 @@ public class FileUploadController {
 
 	@GetMapping("/uploadfile/add")
 	public String listUploadedFiles(Model model) throws IOException {
-		
-		System.out.println("Model in list get start:" + model);
 
 		model.addAttribute("files", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
@@ -48,19 +47,16 @@ public class FileUploadController {
 	@GetMapping("/uploadfile/update")
 	public String updateUploadedImage(@RequestParam("productId") int theId, Model model,
 			RedirectAttributes redirectAttributes) throws IOException {
-		
-		System.out.println("Model in list get start:" + model);
-	System.out.println("Product_id: " + theId);
 
 		model.addAttribute("files", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 						"serveFile", path.getFileName().toString()).build().toUri().toString())
 				.collect(Collectors.toList()));
-//		redirectAttributes.addAttribute("theId",theId);
 
 		model.addAttribute("theId",theId);
+		theProductId = theId;
 		return "uploadForm";
-//		return "redirect:/products/showFormForUpdate?productId="+theId+"";
+
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -77,17 +73,17 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes, Model theModel) {
 
 		storageService.store(file);
-		System.out.println("**** the model: " + theModel);
+
 		String s = new String();		
 		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
 		String s1 = new String();
 		s1 = s.substring(27);
 		
 		redirectAttributes.addFlashAttribute("imgPath",s1);
-		
 	
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
+		
 		return "redirect:/products/showFormForAdd";
 	}
 		
@@ -96,8 +92,7 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes, Model theModel) {
 
 		storageService.store(file);
-		System.out.println("**** the in update start model: " + theModel);
-		System.out.println("get flash attroutes: " + redirectAttributes.getFlashAttributes());
+
 		String s = new String();		
 		s = "/"+storageService.getFilePath()+file.getOriginalFilename();
 		String s1 = new String();
@@ -105,13 +100,12 @@ public class FileUploadController {
 		
 		redirectAttributes.addFlashAttribute("imgPath",s1);
 		
-	
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
-	System.out.println("model in file iupload end: "+ theModel);
+
 	redirectAttributes.addFlashAttribute("productId",1);
-	return "redirect:/products/showFormForUpdate?productId=1";
-//	return "uploadForm";
+	return "redirect:/products/showFormForUpdate?productId="+theProductId+"";
+
 
 	}
 
