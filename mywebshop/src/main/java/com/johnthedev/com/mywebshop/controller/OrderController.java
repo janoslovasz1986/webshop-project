@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.johnthedev.com.mywebshop.configuration.security.UserService;
-import com.johnthedev.com.mywebshop.configuration.security.model.User;
 import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.Order;
 import com.johnthedev.com.mywebshop.entity.OrderStatus;
@@ -42,8 +40,8 @@ public class OrderController {
 	@Autowired
 	public ProductService productService;
 	
-	@Autowired
-	public UserService userService;
+//	@Autowired
+//	public UserService userService;
 
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
@@ -60,13 +58,13 @@ public class OrderController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		User user = userService.findUserByUserName(auth.getName());
+//		User user = userService.findUserByUserName(auth.getName());
 
 		List<Order> theOrders = orderService.findAll();
 
 		theModel.addAttribute("order", theOrders);
 		
-		theModel.addAttribute("userName", user.getName());
+//		theModel.addAttribute("userName", user.getName());
 
 		return "orders/list-orders";
 	}
@@ -77,12 +75,12 @@ public class OrderController {
 		Customer tempCustomer = new Customer();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
+//		User user = userService.findUserByUserName(auth.getName());
 		
-		tempCustomer.setEmail(user.getEmail());
-		tempCustomer.setFirstName(user.getName());
-		tempCustomer.setId(user.getId());
-		tempCustomer.setLastName(user.getLastName());
+//		tempCustomer.setEmail(user.getEmail());
+//		tempCustomer.setFirstName(user.getName());
+//		tempCustomer.setId(user.getId());
+//		tempCustomer.setLastName(user.getLastName());
 		
 		
 		ShoppingCart tShoppingCart = new ShoppingCart();

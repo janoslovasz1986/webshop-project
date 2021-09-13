@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.johnthedev.com.mywebshop.configuration.security.UserService;
 import com.johnthedev.com.mywebshop.dto.ProductDto;
 import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.mapper.ProductDtoMapper;
@@ -33,8 +32,8 @@ public class ProductController {
 	@Autowired
 	public ProductDtoMapper productDtoMapper;
 	
-	@Autowired
-	public UserService userService;
+//	@Autowired
+//	public UserService userService;
 	
 	@GetMapping("/list")
 	public String listProducts(Model theModel) {

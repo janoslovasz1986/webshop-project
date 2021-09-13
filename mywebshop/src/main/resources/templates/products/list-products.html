@@ -174,22 +174,21 @@
 <body>
 
 	<div class="container">
-	<!-- 
-		<div class="panel-group" style="margin-top: 40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
+	
+	<div>
+		User: <span sec:authentication="name"></span>
+		<br>
+		Role(s): <span sec:authentication="principal.authorities"></span>
+		<br><br>
+	</div>
 
-					<h5>You are logged in as</h5>
-					<span th:if="${user != null}" th:text="${user.getName}"></span>
-				</div>
-			</div>
- -->
-		</div>
-
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>
+	<!-- Add a logout button -->
+	<form action="#" th:action="@{/logout}" 
+			   method="POST">
+	
+		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+	
+	</form>
 
 		<h3>Products list</h3>
 

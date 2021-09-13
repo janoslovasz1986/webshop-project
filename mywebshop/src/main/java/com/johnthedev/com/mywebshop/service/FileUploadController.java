@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,7 @@ import com.johnthedev.com.mywebshop.service.storage.StorageFileNotFoundException
 import com.johnthedev.com.mywebshop.service.storage.StorageService;
 
 @Controller
+//@RequestMapping
 public class FileUploadController {
 
 	private final StorageService storageService;
@@ -57,6 +59,7 @@ public class FileUploadController {
 		theProductId = theId;
 		return "uploadForm";
 
+
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -71,7 +74,7 @@ public class FileUploadController {
 	@PostMapping("/addImage")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes, Model theModel) {
-
+		System.out.println("***********");
 		storageService.store(file);
 
 		String s = new String();		
@@ -84,6 +87,7 @@ public class FileUploadController {
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 		
+//		return "redirect:/products/showFormForAdd";
 		return "redirect:/products/showFormForAdd";
 	}
 		
@@ -91,6 +95,7 @@ public class FileUploadController {
 	public String handleImageUpdate(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes, Model theModel) {
 
+		System.out.println("Post works");
 		storageService.store(file);
 
 		String s = new String();		
@@ -103,8 +108,9 @@ public class FileUploadController {
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
-	redirectAttributes.addFlashAttribute("productId",1);
+//	redirectAttributes.addFlashAttribute("productId",1);
 	return "redirect:/products/showFormForUpdate?productId="+theProductId+"";
+//	return "forward:/products/showFormForUpdate?productId="+theProductId+"";
 
 
 	}

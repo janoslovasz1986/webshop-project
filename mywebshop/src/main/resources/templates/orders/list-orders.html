@@ -18,20 +18,26 @@
 
 	<div class="container">
 	
-		<div class="panel-heading">
-				<div>
+		<div class="panel-heading">			
 				<h3> You are logged in as</h3>
-               </div>
-               <span th:utext="${userName}"></span>
+				<span sec:authentication="name"></span>
          </div>
          
-         
+       	<div>
+			User: <span sec:authentication="name"></span>
+			<br>
+			Role(s): <span sec:authentication="principal.authorities"></span>
+			<br><br>
+		</div>
+		
+		<form action="#" th:action="@{/logout}" 
+			   method="POST">
 	
-	 <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
-        </button>
-    </form>
+			<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+	
+		</form>
+         
+
 
 		<h3>Order all list</h3>
 
