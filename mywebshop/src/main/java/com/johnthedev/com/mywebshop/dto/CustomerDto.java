@@ -1,27 +1,37 @@
 package com.johnthedev.com.mywebshop.dto;
 
-import javax.persistence.Column;
-
-import com.johnthedev.com.mywebshop.entity.Customer;
-import com.johnthedev.com.mywebshop.entity.ShoppingCart;
-
 public class CustomerDto {
 	
 	private int id; 
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String password;
 	
 	public CustomerDto() {
 	
 	}
 
-	public CustomerDto(int id, String firstName, String lastName, String email) {
+
+
+	public CustomerDto(String firstName, String lastName, String email, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+
+
+
+	public CustomerDto(int id, String firstName, String lastName, String email, String password) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -55,11 +65,27 @@ public class CustomerDto {
 		this.email = email;
 	}
 
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "CustomerDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -69,8 +95,11 @@ public class CustomerDto {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -98,9 +127,15 @@ public class CustomerDto {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		return true;
 	}
-	
+
+
 	
 	
 	

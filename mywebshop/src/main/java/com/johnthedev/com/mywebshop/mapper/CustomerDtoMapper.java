@@ -25,6 +25,7 @@ public class CustomerDtoMapper {
 		theCustomerDto.setFirstName(theCustomer.getFirstName());
 		theCustomerDto.setLastName(theCustomer.getLastName());
 		theCustomerDto.setEmail(theCustomer.getEmail());
+		theCustomerDto.setPassword(theCustomer.getPassword());
 
 		return theCustomerDto;
 	}
@@ -45,7 +46,8 @@ public class CustomerDtoMapper {
 		theCustomer.setFirstName(theCustomerDto.getFirstName());
 		theCustomer.setLastName(theCustomerDto.getLastName());
 		theCustomer.setEmail(theCustomerDto.getEmail());
-
+		theCustomer.setPassword(theCustomerDto.getPassword());
+		
 		return theCustomer;
 	}
 

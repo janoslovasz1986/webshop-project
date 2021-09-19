@@ -1,8 +1,13 @@
 package com.johnthedev.com.mywebshop.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +43,24 @@ public class ProductController {
 	@GetMapping("/list")
 	public String listProducts(Model theModel) {
 		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		System.out.println(auth.toString());
+	
+//				if (auth instanceof AnonymousAuthenticationToken) return "products/list-products";
 		
-		//User user = userService.findUserByUserName(auth.getName());
+		theModel.addAttribute("theauth", auth);
+		
+		boolean isAnonym = auth.getPrincipal().toString()=="anonymousUser";
 		
 		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
+		
 		theModel.addAttribute("products", theProducts);
+		System.out.println("princi: "+auth.getPrincipal());
+		theModel.addAttribute("isAnonym", isAnonym);
+		System.out.println(isAnonym);
+		
 		
 		return "products/list-products";
 	}

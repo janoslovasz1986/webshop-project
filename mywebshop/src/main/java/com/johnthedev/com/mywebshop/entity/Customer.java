@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
+@Table(name="customers")
 public class Customer {
 
 	@Id
@@ -25,22 +25,32 @@ public class Customer {
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="password")
+	private String password;
+	
+	
 	public Customer() {
 	}
+	
 
-	public Customer(String firstName, String lastName, String email) {
+	public Customer(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 	}
-
 	
-	public Customer(int id, String firstName, String lastName, String email) {
+	
+
+
+	public Customer(int id, String firstName, String lastName, String email, String password) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 	}
+
 
 	public int getId() {
 		return id;
@@ -74,10 +84,23 @@ public class Customer {
 		this.email = email;
 	}
 
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -87,8 +110,10 @@ public class Customer {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -116,8 +141,15 @@ public class Customer {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		return true;
 	}
+
+
 	
 	
 	

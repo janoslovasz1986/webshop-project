@@ -1,12 +1,19 @@
 <!DOCTYPE HTML>
-<html lang="en" xlmns:th="http:/www.thymeleaf.org"  xmlns="http://www.sprinfgramework.org/schema/security">
+<html lang="en" xlmns:th="http:/www.thymeleaf.org"  xmlns="http://www.sprinfgramework.org/schema/security"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>Products</title>
 
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Slabo+27px|Yesteryear'>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+       	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />	
+		<link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css' />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
@@ -172,24 +179,52 @@
         </script>	
 	</head>
 <body>
-
+	<span th:if="${isAnonym != 'true'}">
 	<div class="container">
 	
+			<nav class="navbar navbar-default">
+		    <div class="container-fluid">
+		       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	
+				    <div class="navbar-text navbar-right">
+				    Üdvözlünk <span sec:authentication="name">Anonymous </span>
+			           <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+				    		| <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Kijelentkezés</a>
+				      </form>
+				  
+				         <form sec:authorize="!isAuthenticated()"  th:action="@{/customers/showFormForAdd}" method="post" class="form-inline">
+				    		| <a href="/customers/showFormForAdd">Regisztráció</a>
+				      </form>
+				    </div>
+				    
+				</div>
+		    </div>
+		</nav>
+	
 	<div>
+	<!-- 
+		<li sec:authorize="!isAuthenticated()" class="nav-item">
+            User: <span sec:authentication="name"></span>
+        </li>
+	 -->
+	 <!-- 
 		User: <span sec:authentication="name"></span>
 		<br>
 		Role(s): <span sec:authentication="principal.authorities"></span>
 		<br><br>
+	 
+
+	
+		<form action="#" th:action="@{/logout}" 
+				   method="POST">
+		
+			<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+		
+		</form>
+		-->
 	</div>
-
-	<!-- Add a logout button -->
-	<form action="#" th:action="@{/logout}" 
-			   method="POST">
+	</span>
 	
-		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
-	
-	</form>
-
 		<h3>Products list</h3>
 
 		<a th:href="@{/products/showFormForAdd}"

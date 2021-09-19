@@ -31,12 +31,12 @@ class OrderServiceTest {
 		orderRepository.deleteAll();
 		
 		Order order1 = new Order();
-		order1.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
+//		order1.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
 		order1.setOrderStatus(OrderStatus.MODIFIABLE);
 		order1.setShoppingCart(new ShoppingCart());
 		
 		Order order2 = new Order();
-		order2.setCustomer(new Customer("Jack","Jones","jackjones@gmail.com"));
+//		order2.setCustomer(new Customer("Jack","Jones","jackjones@gmail.com"));
 		order2.setOrderStatus(OrderStatus.MODIFIABLE);
 		order2.setShoppingCart(new ShoppingCart());
 		
@@ -61,7 +61,7 @@ class OrderServiceTest {
 		orderRepository.deleteAll();
 
 		Order order = new Order();
-		order.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
+//		order.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
 		order.setOrderStatus(OrderStatus.MODIFIABLE);
 		order.setShoppingCart(new ShoppingCart());
 		
@@ -74,7 +74,7 @@ class OrderServiceTest {
 	@Test
 	void testSaveOrder() {
 		Order order = new Order();
-		order.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
+//		order.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
 		order.setOrderStatus(OrderStatus.MODIFIABLE);
 		order.setShoppingCart(new ShoppingCart());
 		
@@ -94,12 +94,12 @@ class OrderServiceTest {
 	orderRepository.deleteAll();
 		
 		Order order1 = new Order();
-		order1.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
+//		order1.setCustomer(new Customer("John","Smith","johnsmith@gmail.com"));
 		order1.setOrderStatus(OrderStatus.MODIFIABLE);
 		order1.setShoppingCart(new ShoppingCart());
 		
 		Order order2 = new Order();
-		order2.setCustomer(new Customer("Jack","Jones","jackjones@gmail.com"));
+//		order2.setCustomer(new Customer("Jack","Jones","jackjones@gmail.com"));
 		order2.setOrderStatus(OrderStatus.MODIFIABLE);
 		order2.setShoppingCart(new ShoppingCart());
 		

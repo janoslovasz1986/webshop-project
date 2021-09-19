@@ -5,17 +5,15 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
-public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	// add a reference to our security data source
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	@Qualifier("securityDataSource")
@@ -23,32 +21,40 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		// use jdbc authentication ... oh yeah!!!		
+	
 		auth.jdbcAuthentication().dataSource(securityDataSource);
+		System.out.println(auth.toString());
 		
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-			.antMatchers("/products/list").hasAnyRole("MANAGER", "ADMIN")
-			.antMatchers("/employees/delete").hasRole("ADMIN")
-			.antMatchers("/resources/**").permitAll()
+		http
+
+//			.anonymous().principal("guest").authorities("GUEST_ROLE")
+//			.and()
+			.authorizeRequests()
+			.antMatchers("/shoppingcart/list").hasRole("ADMIN")
+			.antMatchers("/products/list**").permitAll()
+
+			
+//			.antMatchers("/resources/**").permitAll()
 			.and()
 			.formLogin()
-				.loginPage("/showMyLoginPage")
+				.loginPage("/login")
 				.loginProcessingUrl("/authenticateTheUser")
+				.defaultSuccessUrl("/products/list", true)
 				.permitAll()
 			.and()
 			.logout().permitAll()
 			.and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
-		
-
-		
+			.exceptionHandling().accessDeniedPage("/access-denied")
+			.and()
+			.csrf().disable();
 	}
+	
+
 		
 }
 
