@@ -44,10 +44,6 @@ public class ProductController {
 	public String listProducts(Model theModel) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		System.out.println(auth.toString());
-	
-//				if (auth instanceof AnonymousAuthenticationToken) return "products/list-products";
 		
 		theModel.addAttribute("theauth", auth);
 		
@@ -55,11 +51,8 @@ public class ProductController {
 		
 		List<ProductDto> theProducts = productDtoMapper.productEntityListToProductDtoListMapper(productService.findAll());
 		
-		
 		theModel.addAttribute("products", theProducts);
-		System.out.println("princi: "+auth.getPrincipal());
 		theModel.addAttribute("isAnonym", isAnonym);
-		System.out.println(isAnonym);
 		
 		
 		return "products/list-products";

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.dto.CustomerDto;
-import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.mapper.CustomerDtoMapper;
+import com.johnthedev.com.mywebshop.mapper.CustomerToUserMapper;
 import com.johnthedev.com.mywebshop.service.CustomerService;
 
 @Controller
@@ -30,6 +30,9 @@ public class CustomerController {
 	
 	@Autowired
 	public CustomerDtoMapper customerDtoMapper;
+	
+	@Autowired
+	public CustomerToUserMapper customerToUserMapper;
 	
 	
 	@GetMapping("/list")
@@ -67,6 +70,8 @@ public class CustomerController {
 	public String saveCustomer(@ModelAttribute("customer") CustomerDto theCustomer) {
 		
 		customerService.save(customerDtoMapper.customerDtoToCustomerEntityMapper(theCustomer));
+		
+		customerToUserMapper.fromCustomerToUserMapper(customerDtoMapper.customerDtoToCustomerEntityMapper(theCustomer));
 		
 		return "redirect:/customers/list";
 	}
