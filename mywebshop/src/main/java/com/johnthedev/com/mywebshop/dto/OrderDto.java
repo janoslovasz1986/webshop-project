@@ -1,12 +1,12 @@
 package com.johnthedev.com.mywebshop.dto;
 
-import com.johnthedev.com.mywebshop.entity.Customer;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 
 public class OrderDto {
 	
 	private int id; 
-	private Customer customer;
+	private long userId;
+	private String userName;
 	private ShoppingCart shoppingCart;
 	private String address;
 	
@@ -15,75 +15,87 @@ public class OrderDto {
 		
 	}
 
-	public OrderDto(int id, Customer customer, ShoppingCart shoppingCart) {
-		this.id = id;
-		this.customer = customer;
-		this.shoppingCart = shoppingCart;
-	}
 
-	public OrderDto(Customer customer, ShoppingCart shoppingCart) {
-		this.customer = customer;
-		this.shoppingCart = shoppingCart;
-	}
-
-	
-	
-	public OrderDto(int id, Customer customer, ShoppingCart shoppingCart, String address) {
+	public OrderDto(int id, long userId, ShoppingCart shoppingCart, String address, String userName) {
 		this.id = id;
-		this.customer = customer;
+		this.userId = userId;
 		this.shoppingCart = shoppingCart;
 		this.address = address;
+		this.userName=userName;
 	}
-	
+
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
+
 
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
 	}
 
+
 	public void setShoppingCart(ShoppingCart shoppingCart) {
 		this.shoppingCart = shoppingCart;
 	}
-	
-	
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
+
+	
+
+
 	@Override
 	public String toString() {
-		return "OrderDto [id=" + id + ", customer=" + customer + ", shoppingCart=" + shoppingCart + "]";
+		return "OrderDto [id=" + id + ", userId=" + userId + ", userName=" + userName + ", shoppingCart=" + shoppingCart
+				+ ", address=" + address + "]";
 	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((shoppingCart == null) ? 0 : shoppingCart.hashCode());
+		result = prime * result + (int) (userId ^ (userId >>> 32));
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -94,10 +106,10 @@ public class OrderDto {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderDto other = (OrderDto) obj;
-		if (customer == null) {
-			if (other.customer != null)
+		if (address == null) {
+			if (other.address != null)
 				return false;
-		} else if (!customer.equals(other.customer))
+		} else if (!address.equals(other.address))
 			return false;
 		if (id != other.id)
 			return false;
@@ -106,11 +118,12 @@ public class OrderDto {
 				return false;
 		} else if (!shoppingCart.equals(other.shoppingCart))
 			return false;
+		if (userId != other.userId)
+			return false;
 		return true;
 	}
-	
-	
-	
+
+
 	
 	
 	

@@ -134,9 +134,14 @@ public class User {
 		this.roles.add(new Role(roleName));
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
+				+ ", activation=" + activation + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
+
+	
 
 }

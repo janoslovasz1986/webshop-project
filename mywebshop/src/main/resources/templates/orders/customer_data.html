@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xlmns:th="http:/www.thymeleaf.org">
 <head>
-<title>Order directory</title>
+<title>Orders</title>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -36,16 +36,41 @@
 			<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
 	
 		</form>
-         
+		
+        <h3>Customer data </h3>
+        
+        <table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Customer Id</th>
+					<th>Customer name</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tempCustomer : ${customer}">
+					<td th:text="${tempCustomer.id}" />
+					<td th:text="${tempCustomer.fullName}" />					
+					<td> 
+						<!-- 
+						<a th:href="@{/orders/abortOrderByCustomer(orderId=${tempOrder.id})}" 
+						class="btn btn-info btn-sm">
+						Edit
+						</a>
+						 -->
+					</td>											 
+				</tr>
+			</tbody>
+		</table>
 
 
-		<h3>Order all list</h3>
+		<h3>Orders</h3>
 
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
 					<th>Order Id</th>
-					<th>User Id</th>
+					<th>Customer Id</th>
 					<th>Product Name</th>
 					<th>Product Price</th>
 					<th>Order Status</th>
@@ -74,16 +99,12 @@
 					</td>
 					<td th:text="${tempOrder.orderStatus}" />
 					<td>
-						<a th:href="@{/orders/approve(orderId=${tempOrder.id})}" 
+						<a th:href="@{/orders/abortOrderByCustomer(orderId=${tempOrder.id})}" 
 						class="btn btn-info btn-sm">
-						Valide
-						</a>
-					|	
-						<a th:href="@{/orders/deleteOrderOnCustomerRequest(orderId=${tempOrder.id})}" 
-						class="btn btn-info btn-sm">
-						Close on CR
+						Close
 						</a>
 					</td>
+			
 					
 					 
 				</tr>

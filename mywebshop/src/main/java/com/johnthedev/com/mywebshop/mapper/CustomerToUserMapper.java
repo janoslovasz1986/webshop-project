@@ -10,9 +10,6 @@ import com.johnthedev.com.mywebshop.service.UserServiceImpl;
 
 public class CustomerToUserMapper {
 	
-//	@Autowired
-//	private Customer theCustomer;
-	
 	@Autowired
 	private UserServiceImpl theUserServiceImpl;
 	

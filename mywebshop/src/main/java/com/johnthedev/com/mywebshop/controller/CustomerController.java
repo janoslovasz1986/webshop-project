@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johnthedev.com.mywebshop.dto.CustomerDto;
+import com.johnthedev.com.mywebshop.entity.User;
 import com.johnthedev.com.mywebshop.mapper.CustomerDtoMapper;
 import com.johnthedev.com.mywebshop.mapper.CustomerToUserMapper;
 import com.johnthedev.com.mywebshop.service.CustomerService;
+import com.johnthedev.com.mywebshop.service.UserService;
 
 @Controller
 @RequestMapping("/customers")
@@ -34,23 +36,30 @@ public class CustomerController {
 	@Autowired
 	public CustomerToUserMapper customerToUserMapper;
 	
+	@Autowired
+	public UserService theUserService;
+	
 	
 	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
 		
 		List<CustomerDto> theCustomers = customerDtoMapper.customerEntityListToCustomerDtoListMapper(customerService.findAll());
+		List<User> theUsers = theUserService.findAllUsers();
+
 		
 		theModel.addAttribute("customers", theCustomers);
+		theModel.addAttribute("users", theUsers);
 		
 		return "customers/list-customers";
 	}
 	
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("customerId") int theId, Model theModel) {
+	public String showFormForUpdate(@RequestParam("customerId") long theId, Model theModel) {
 		
-		CustomerDto theCustomer = customerDtoMapper.customerEntityToCustomerDtoMapper(customerService.findById(theId));
 		
-		theModel.addAttribute("customer", theCustomer);
+		User theUser =  theUserService.findUserById(theId);
+		
+		theModel.addAttribute("customer", theUser);
 		
 		return "customers/customer-form";
 	}
@@ -58,20 +67,23 @@ public class CustomerController {
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		
-		CustomerDto theCustomer = new CustomerDto();
-		
-		theModel.addAttribute("customer", theCustomer);
-		
+		User theUser = new User();
+		theModel.addAttribute("customer", theUser);
 		return "customers/customer-form";
 	}
 	
 	
+	
 	@PostMapping("/save")
-	public String saveCustomer(@ModelAttribute("customer") CustomerDto theCustomer) {
-		
-		customerService.save(customerDtoMapper.customerDtoToCustomerEntityMapper(theCustomer));
-		
-		customerToUserMapper.fromCustomerToUserMapper(customerDtoMapper.customerDtoToCustomerEntityMapper(theCustomer));
+	public String saveCustomer(@ModelAttribute("customer") User theUser) {
+//		innen folytat
+//		sysout userid-t csekkolni ha nincs save ha ven update
+		System.out.println(theUser.toString());
+		if (theUser.getId() == null) {
+			theUserService.registerUser(theUser);
+		} else {
+			theUserService.updateUserData(theUser);
+		}
 		
 		return "redirect:/customers/list";
 	}

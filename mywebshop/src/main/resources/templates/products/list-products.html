@@ -98,15 +98,8 @@
                 transform: scale(1);
             }
 
-
-
-
-
-
-
             button {
                 border: none;
-                outline: 0;
                 display: inline-block;
                 padding: 8px;
                 color: white;
@@ -132,6 +125,12 @@
             .btn-outline-info{
                 border: 2px solid;
             }
+            
+            .customerButton{
+            	 display: inline-block;
+            }
+            
+            
         </style>
         <script>
             var $cell = $('.card');
@@ -199,46 +198,47 @@
 				    
 				</div>
 		    </div>
-		</nav>
+			</nav>
 	
-	<div>
-	<!-- 
-		<li sec:authorize="!isAuthenticated()" class="nav-item">
-            User: <span sec:authentication="name"></span>
-        </li>
-	 -->
-	 <!-- 
-		User: <span sec:authentication="name"></span>
-		<br>
-		Role(s): <span sec:authentication="principal.authorities"></span>
-		<br><br>
-	 
 
-	
-		<form action="#" th:action="@{/logout}" 
-				   method="POST">
-		
-			<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
-		
-		</form>
-		-->
-	</div>
 	</span>
 	
-		<h3>Products list</h3>
-
-		<a th:href="@{/products/showFormForAdd}"
+	<div>
+		<a href="/shoppingcart/list">Shoppingcart</a> 
+		<br> 
+		<a href="/orders/listorders">Back to Orders List</a> 
+		<br> 
+		
+		<div sec:authorize="!isAuthenticated"> 
+			<a href="/login">to Login</a>
+		</div>
+	</div>
+    	<div sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/customers/list}"
+			class="btn btn-primary btn-sm mb-3"> List / Edit Customers </a>
+		</div>
+		<br>
+		
+       	<div sec:authorize="hasAuthority('CUSTOMER')">
+			<a th:href="@{/orders/listActualCustomersOrders}"
+			class="btn btn-primary btn-sm mb-3"> Customer data </a>
+		</div>
+		<br>
+       	<div sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/products/showFormForAdd}"
 			class="btn btn-primary btn-sm mb-3"> Add Product </a>
+		</div>
 
-		<form th:action="@{/products/search}" method="GET">
+	
+		
+
+	<h3>Products list</h3>
+	
+			<form th:action="@{/products/search}" method="GET">
 			<input type="text" name="theSearchName" th:value="${theSearchName}"
 				class="form-control mb-3 col-2" placeholder="Product Name">
-			<button type="submit" class="btn btn-info col-2">Search</button>
+			<button type="submit" class="btn btn-primary btn-sm">Search</button>
 		</form>
-		
-
-
-		
 	</div>
 	
 	<div class="wrapper">
@@ -265,42 +265,28 @@
 
                               </div>
                          </div>
-                 			
-                 			
-                 			<span  th:if="${user == null}">
+                 		<span style="display:inline;">	
+               		 	<div sec:authorize="!hasAuthority('ADMIN')">	
                   			<a th:href="@{/shoppingcart/addProductToShoppingCart(productId=${tempProduct.id})}"
-						class="btn btn-info btn-sm"> Add to ShoppingCart </a> 
-					</span> 
-					<!-- <span  th:if="${user != null and user.hasAdminRole == true}">
-						  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
-							class="btn btn-info btn-sm"> Update </a>
-					</span>  -->
+								id="customerButton" class="btn btn-info btn-sm"> Add to ShoppingCart </a> 
+						</div>
 					
-					<span >
-						  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
-							class="btn btn-info btn-sm"> Update </a>
-					</span> 
-					
-					<span>  
-						  <a th:href="@{/products/delete(productId=${tempProduct.id})}"
-								class="btn btn-info btn-sm"
-								onclick="if (!(confirm('Are you sure want to delete this product?'))) return false">
-									Delete </a>
-					</span> 
-					 -
+						<div sec:authorize="hasAuthority('ADMIN')">
+							  <a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}"
+								id="customerButton" class="btn btn-info btn-sm"> Update </a>
+						</div> 
+						
+						<div sec:authorize="hasAuthority('ADMIN')"> 
+							  <a th:href="@{/products/delete(productId=${tempProduct.id})}"
+									class="btn btn-info btn-sm"
+									onclick="if (!(confirm('Are you sure want to delete this product?'))) return false">
+										Delete </a>
+						</div>
+						</span>
                 </div>
                         </td>         
 			</tr>
 		</div>
-	</div>
-		
-	
-	<div>
-		<a href="/shoppingcart/list">Shoppingcart</a> 
-		<br> 
-		<a href="/orders/listorders">Back to Orders List</a> 
-		<br> 
-		<a href="/login">to Login</a>
 	</div>
 
 	

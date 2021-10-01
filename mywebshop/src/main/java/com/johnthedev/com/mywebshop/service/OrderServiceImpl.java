@@ -61,7 +61,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
 
 	}
 

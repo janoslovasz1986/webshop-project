@@ -27,22 +27,18 @@
 			th:object="${customer}"  method="POST">
 			
 									
-			<!-- Add hidden form fiel to handle update -->
+			<!-- Add hidden form field to handle update -->
 			<input type="hidden" th:field="*{id}"/>
-			<label for="firstName" class="sr-only">Keresztnév</label> 
-			<input type="text" th:field="*{firstName}"
-					class="form-control mb-4 col-4" placeholder="First Name">
-					
-			<label for="lastName" class="sr-only">Vezetéknév</label> 
-			<input type="text" th:field="*{lastName}"
-					class="form-control mb-4 col-4" placeholder="Last Name">
-		
-			<label for="email" class="sr-only">Email</label> 
+			<label for="firstName" class="sr-only">Email</label> 
 			<input type="text" th:field="*{email}"
 					class="form-control mb-4 col-4" placeholder="Email">
 					
+			<label for="lastName" class="sr-only">Teljes név</label> 
+			<input type="text" th:field="*{fullName}"
+					class="form-control mb-4 col-4" placeholder="Full Name">
+					
 			<label for="password" class="sr-only">Jelszó</label> 
-			<input type="text" th:field="*{password}"
+			<input type="password" th:field="*{password}"
 					class="form-control mb-4 col-4" placeholder="Password">
 
 			<button type="submit" class="btn btn-info col-2">Save</button>			

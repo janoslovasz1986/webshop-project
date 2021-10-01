@@ -22,7 +22,8 @@ public class OrderDtoMapper {
 		theOrderDto = new OrderDto();
 
 		theOrderDto.setId(theOrder.getId());
-		theOrderDto.setCustomer(theOrder.getCustomer());
+		theOrderDto.setUserId(theOrder.getUserId());
+		theOrderDto.setUserName(theOrder.getUserName());
 		theOrderDto.setShoppingCart(theOrder.getShoppingCart());
 
 		return theOrderDto;
@@ -41,7 +42,8 @@ public class OrderDtoMapper {
 		theOrder = new Order();
 
 		theOrder.setId(theOrderDto.getId());
-		theOrder.setCustomer(theOrderDto.getCustomer());
+		theOrder.setUserId(theOrderDto.getUserId());
+		theOrder.setUserName(theOrderDto.getUserName());
 		theOrder.setShoppingCart(theOrderDto.getShoppingCart());
 		
 		return theOrder;

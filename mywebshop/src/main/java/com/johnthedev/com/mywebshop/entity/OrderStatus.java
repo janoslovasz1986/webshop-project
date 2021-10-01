@@ -4,8 +4,9 @@ public enum OrderStatus {
 	
 	MODIFIABLE,
 	APPROVED,
-	UNDERDELIVERY,
+	UNDELIVERED,
 	DELIVERED,
+	ABORT,
 	DELETED
 
 }

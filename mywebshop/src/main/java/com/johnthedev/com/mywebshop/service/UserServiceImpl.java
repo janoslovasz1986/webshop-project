@@ -1,5 +1,8 @@
 package com.johnthedev.com.mywebshop.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -8,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.johnthedev.com.mywebshop.dao.RoleRepository;
@@ -63,6 +68,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		
 		user.setEnabled(true);
 		user.setActivation(generateKey());
+		
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+		
 		userRepository.save(user);
 		
 
@@ -92,6 +101,53 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setActivation("");
 		userRepository.save(user);
 		return "ok";
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		
+		return (List<User>) userRepository.findAll();
+	}
+
+	@Override
+	public User findUserById(long theId) {
+		
+		Optional<User> foundUser= userRepository.findById(theId);
+		
+		User theUser = new User();
+		
+		if (foundUser.isPresent()) {
+			
+			theUser = foundUser.get(); 
+			
+		} else {
+			
+			throw new RuntimeException("Did not find user id - " + theId);
+		}
+		
+		return theUser;
+	}
+
+	@Override
+	public void updateUserData(User theUser) {
+
+		List<User> allUsers = new ArrayList<User>();
+		allUsers = (List<User>) userRepository.findAll();
+		
+		for (User tempUser : allUsers) {
+			if (tempUser.getId() == theUser.getId()) {
+				
+				tempUser.setActivation(theUser.getActivation());
+				tempUser.setEmail(theUser.getEmail());
+				tempUser.setEnabled(theUser.getEnabled());
+				tempUser.setFullName(theUser.getFullName());
+				tempUser.setPassword(theUser.getPassword());
+				tempUser.setRoles(theUser.getRoles());
+				
+				userRepository.save(tempUser);
+	
+			}
+		}
 	}
 
 }

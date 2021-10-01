@@ -27,25 +27,25 @@
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
+					<th>Id</th>
 					<th>Email</th>
+					<th>Full name</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			
 			<tbody>
-				<tr th:each="tempCustomer : ${customers}">
-					<td th:text="${tempCustomer.firstName}"/>
-					<td th:text="${tempCustomer.lastName}"/>
-					<td th:text="${tempCustomer.email}"/>
+				<tr th:each="tempUser : ${users}">
+					<td th:text="${tempUser.id}"/>
+					<td th:text="${tempUser.email}"/>
+					<td th:text="${tempUser.fullName}"/>
 					<td>
-						<a th:href="@{/customers/showFormForUpdate(customerId=${tempCustomer.id})}" 
+						<a th:href="@{/customers/showFormForUpdate(customerId=${tempUser.id})}" 
 						class="btn btn-info btn-sm">
 						Update
 						</a>
 						
-						<a th:href="@{/customers/delete(customerId=${tempCustomer.id})}" 
+						<a th:href="@{/customers/delete(customerId=${tempUser.id})}" 
 						class="btn btn-info btn-sm">
 						Delete
 						</a>
