@@ -17,6 +17,7 @@ import com.johnthedev.com.mywebshop.mapper.CustomerDtoMapper;
 import com.johnthedev.com.mywebshop.mapper.CustomerToUserMapper;
 import com.johnthedev.com.mywebshop.service.CustomerService;
 import com.johnthedev.com.mywebshop.service.UserService;
+import com.johnthedev.com.mywebshop.service.email.EmailService;
 
 @Controller
 @RequestMapping("/customers")
@@ -38,6 +39,9 @@ public class CustomerController {
 	
 	@Autowired
 	public UserService theUserService;
+	
+	@Autowired
+	public EmailService theEmailService;
 	
 	
 	@GetMapping("/list")
@@ -76,11 +80,12 @@ public class CustomerController {
 	
 	@PostMapping("/save")
 	public String saveCustomer(@ModelAttribute("customer") User theUser) {
-//		innen folytat
-//		sysout userid-t csekkolni ha nincs save ha ven update
+
 		System.out.println(theUser.toString());
 		if (theUser.getId() == null) {
 			theUserService.registerUser(theUser);
+			theEmailService.sendMessage(theUser.getEmail());  //send email form customer about successful registration 
+			
 		} else {
 			theUserService.updateUserData(theUser);
 		}
