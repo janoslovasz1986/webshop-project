@@ -7,19 +7,24 @@ It's functionality is expanding weeks by weeks.
 At the moment the available functions are:
     for administrators:
       - create Product
-      - manage orders
+      - manage Orders
+      - maage Customers
 
 
-    for customers:
-      - put products in shoppingcart
+    for anonymous customers:
+      - list Products
+      - register on the site
 
     for logged in customers:
+      
+      - add Product to ShoppingCart
       - make an order from shoppingcart
-      - close order in case of donű1t want to buy
+      - manage personal Orders
+            - close order in case of change of mind
 
 Again, the functions are expanding.
 
 Used techologies:
-  - backend: java spring
+  - backend: Java Spring/Spring Boot
   - DB : MySql
   - frontend: thymeleaf, HTML, CSS, Bootstrap, javascript
