@@ -18,4 +18,6 @@ public interface UserService {
 
 	public void updateUserData(User theUser);
 
+	public void deleteById(long theId);
+
 }

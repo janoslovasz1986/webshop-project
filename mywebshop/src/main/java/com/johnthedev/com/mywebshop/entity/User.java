@@ -46,17 +46,6 @@ public class User {
 	private Set<Role> roles = new HashSet<Role>();
 	
 	public User() {}
-	
-	
-
-	public User(String email, String password, String fullName, String activation, Boolean enabled, Set<Role> roles) {
-		this.email = email;
-		this.password = password;
-		this.fullName = fullName;
-		this.activation = activation;
-		this.enabled = enabled;
-		this.roles = roles;
-	}
 
 	public User(Long id, String email, String password, String fullName, String activation, Boolean enabled,
 			Set<Role> roles) {
@@ -69,7 +58,14 @@ public class User {
 		this.roles = roles;
 	}
 
-
+	public User(String email, String password, String fullName, String activation, Boolean enabled, Set<Role> roles) {
+		this.email = email;
+		this.password = password;
+		this.fullName = fullName;
+		this.activation = activation;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
 
 	public Long getId() {
 		return id;

@@ -130,24 +130,40 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void updateUserData(User theUser) {
-
+		
 		List<User> allUsers = new ArrayList<User>();
-		allUsers = (List<User>) userRepository.findAll();
+		allUsers = findAllUsers();
 		
 		for (User tempUser : allUsers) {
 			if (tempUser.getId() == theUser.getId()) {
 				
 				tempUser.setActivation(theUser.getActivation());
 				tempUser.setEmail(theUser.getEmail());
-				tempUser.setEnabled(theUser.getEnabled());
+				tempUser.setEnabled(true);
 				tempUser.setFullName(theUser.getFullName());
-				tempUser.setPassword(theUser.getPassword());
-				tempUser.setRoles(theUser.getRoles());
+				
+				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+				tempUser.setPassword(encoder.encode(theUser.getPassword()));
+
+				
+				Role userRole = roleRepository.findByRole(USER_ROLE);
+				if (userRole != null) {
+					tempUser.getRoles().add(userRole);
+				} else {
+					tempUser.addRoles(USER_ROLE);
+				}
 				
 				userRepository.save(tempUser);
 	
 			}
 		}
+	}
+
+	@Override
+	public void deleteById(long theId) {
+
+		userRepository.deleteById(theId);
+		
 	}
 
 }

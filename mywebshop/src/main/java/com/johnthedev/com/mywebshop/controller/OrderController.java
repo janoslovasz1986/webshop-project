@@ -21,7 +21,6 @@ import com.johnthedev.com.mywebshop.entity.Product;
 import com.johnthedev.com.mywebshop.entity.ShoppingCart;
 import com.johnthedev.com.mywebshop.entity.ShoppingCartItem;
 import com.johnthedev.com.mywebshop.entity.User;
-import com.johnthedev.com.mywebshop.service.CustomerService;
 import com.johnthedev.com.mywebshop.service.OrderService;
 import com.johnthedev.com.mywebshop.service.ProductService;
 import com.johnthedev.com.mywebshop.service.UserService;
@@ -45,9 +44,9 @@ public class OrderController {
 
 	@Autowired
 	public UserService userService;
-
-	@Autowired
-	public CustomerService customerService;
+//
+//	@Autowired
+//	public CustomerService customerService;
 
 	@GetMapping("/list")
 	public String listOrders(Model theModel) {
@@ -59,18 +58,12 @@ public class OrderController {
 		return "orders/list-order";
 	}
 
-	@GetMapping("/listorders")
+	@GetMapping("/listOrders")
 	public String listAllOrders(Model theModel) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-//		User user = userService.findUserByUserName(auth.getName());
 
 		List<Order> theOrders = orderService.findAll();
 
 		theModel.addAttribute("order", theOrders);
-
-//		theModel.addAttribute("userName", user.getName());
 
 		return "orders/list-orders";
 	}
@@ -148,7 +141,7 @@ public class OrderController {
 
 		}
 
-		return "redirect:/orders/listorders";
+		return "redirect:/orders/listOrders";
 	}
 
 	@GetMapping("/deleteOrderOnCustomerRequest")
@@ -194,7 +187,7 @@ public class OrderController {
 			}
 		}
 
-		return "redirect:/orders/listorders";
+		return "redirect:/orders/listOrders";
 	}
 	
 	@GetMapping("/abortOrderByCustomer")
@@ -271,7 +264,6 @@ public class OrderController {
 		theModel.addAttribute("order", userOrders);
 		theModel.addAttribute("customer", tempUser);
 
-//		return "orders/customer-orders";
 		return "orders/customer_data";
 	}
 }
