@@ -62,10 +62,8 @@ public class CustomerController {
 	
 	
 	@PostMapping("/save")
-	public String saveCustomer(@ModelAttribute("customer") User theUser, @ModelAttribute("customerRoles") String tempRoles) {
+	public String saveCustomer(@ModelAttribute("customer") User theUser) {
 
-		System.out.println("customer controller: " + theUser.toString());
-		System.out.println("temproles: " + tempRoles);
 		if (theUser.getId() == null) {
 			theUserService.registerUser(theUser);
 			theEmailService.sendMessage(theUser.getEmail());  //send email form customer about successful registration 
