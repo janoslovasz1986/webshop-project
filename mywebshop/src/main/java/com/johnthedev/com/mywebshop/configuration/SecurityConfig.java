@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/shoppingcart/list").hasAuthority("CUSTOMER")
 			.antMatchers("/orders/listorders").hasAuthority("ADMIN")
 			.antMatchers("/customers/list").hasAuthority("ADMIN")
+//			.antMatchers("/api/**").hasAuthority("ADMIN")
 			.antMatchers("/products/list**").permitAll()
 
 			
